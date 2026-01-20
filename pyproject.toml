@@ -1,0 +1,94 @@
+[tool.poetry]
+name = "flynet-api"
+version = "0.0.1"
+description = "Flynet API"
+authors = [
+    "Abby Ivison",
+    "James Ward <james@jmward.net>",
+    "Bowie Rheault <bowie@rheault.me>"
+]
+license = "propriatery"
+readme = "README.md"
+packages = [
+    { include = "src" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+bcrypt = "4.0.1"
+starlette = "^0.41.2"
+uvicorn = "^0.34.0"
+pydantic = "^2.0.0"
+fastapi = "^0.115.4"
+SQLAlchemy = "^2.0.45"
+python-dotenv = "^0.21.0"
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
+requests = "^2.26.0"
+psycopg2-binary = "^2.9.2"
+gunicorn = "^20.1.0"
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+python-multipart = "^0.0.5"
+openpyxl = "^3.0.9"
+weasyprint = "^54.1"
+Jinja2 = "^3.0.3"
+qrcode = {extras = ["pil"], version = "^7.3.1"}
+alembic = "^1.7.7"
+helpers = "^0.2.0"
+fastapi_utils = "^0.8.0"
+typing-inspect = "^0.9.0"
+pydantic-settings = "^2.7.1"
+httpx = "^0.28.1"
+
+
+[tool.poetry.dev-dependencies]
+flake8 = "^4.0.1"
+pytest = "^6.2.5"
+coverage = { version = "6.2.0", extras = ["toml"]}
+black = "^21.11b1"
+isort = { version = "^5.10.1", extras = ["pyproject"]}
+requests = "^2.26.0"
+pylint = "^2.12.1"
+
+[tool.black]
+# https://github.com/psf/black
+line-length = 121
+target_version = ['py39']
+exclude = '''
+(
+  /(
+    \.git
+    | \.mypy_cache
+    | \.pytest_cache
+    | htmlcov
+    | venv
+    | .venv
+  )/
+)
+'''
+
+[tool.isort]
+# https://github.com/timothycrosley/isort
+# https://github.com/timothycrosley/isort/wiki/isort-Settings
+line_length = 121
+indent = '    '
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+skip_glob = "poetry/**"
+
+[tool.coverage]
+# https://github.com/nedbat/coveragepy
+    [tool.coverage.run]
+    source = ["backend/src"]
+    branch = true
+    omit = ['']
+
+    [tool.coverage.report]
+    exclude_lines = [
+        "# noqa",
+        "raise NotImplementedError"
+    ]
+
+[build-system]
+requires = ["setuptools", "poetry-core>=1.0"]
+build-backend = "poetry.core.masonry.api"
