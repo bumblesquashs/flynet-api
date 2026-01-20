@@ -24,7 +24,7 @@ def insert_logs(db: Session) -> List[FlightLogModel]:
          note="Flight successfully landed in fewer than 10 pieces"
         ),
     FlightLogPopulateModel(
-        id=1,
+        id=2,
         flight_number="BA67",
         date=datetime.now(),
         airline="Bowie Airlines",

@@ -4,8 +4,8 @@ from typing import Optional
 from fastapi_utils.api_model import APIModel
 from model.user import UserModel
 
-class FlightLogModel(APIModel):
-    """Model representing one flight log in the user's history"""
+class FlightLogCreateModel(APIModel):
+    """Model used when creating logs"""
 
     flight_number: Optional[str] = None
     airline: Optional[str] = None
@@ -18,19 +18,19 @@ class FlightLogModel(APIModel):
     plane_registration: Optional[str] = None
     note: Optional[str] = None
 
-    user_id: Optional[int] = None
+class FlightLogModel(FlightLogCreateModel):
+    """Model representing one flight log in the user's history"""
     user: Optional[UserModel] = None
-
-
-class FlightLogCreateModel(FlightLogModel):
-    """Model used when creating logs"""
-    pass
-
-
-class FlightLogUpdateModel(FlightLogModel):
+    user_id: Optional[int] = None
     id: Optional[int]
+
+
+class FlightLogUpdateModel(FlightLogCreateModel):
+    pass
 
 
 class FlightLogPopulateModel(FlightLogModel):
     """Used with initial seed scripts; we need that ID."""
+    user: Optional[UserModel] = None
+    user_id: Optional[int] = None
     id: Optional[int]

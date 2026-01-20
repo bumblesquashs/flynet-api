@@ -8,7 +8,7 @@ from core.dependencies import get_db, get_user
 from fastapi import Depends, HTTPException, Security
 from fastapi_utils.inferring_router import InferringRouter
 from model import SearchResponse
-from model.flight_logs import FlightLogCreateModel, FlightLogModel, FlightLogUpdateModel, FlightLogPopulateModel
+from model.flight_logs import FlightLogCreateModel, FlightLogModel, FlightLogUpdateModel
 from model.responses import GeneralResponse
 from model.security import UserTokenModel
 from sqlalchemy.exc import IntegrityError
@@ -87,12 +87,12 @@ def update(
     """Update an existing flight_log entity, with the ID specified."""
     context = FlightLogsContext(db)
     try:
-        updated_flight_log = context.update(flight_log_id, flight_log)
+        updated_flight_log = context.update(flight_log_id, flight_log, current_user)
     except IntegrityError as e:
         raise HTTPException(status_code=400, detail=f"Integrity error: {''.join(e.orig.args)}") from e
 
     if updated_flight_log is None:
-        raise HTTPException(status_code=400, detail="Could not update log.")
+        raise HTTPException(status_code=400, detail=f"Could not update log: log not found for user {current_user.user_id}.")
 
     return updated_flight_log
 
@@ -106,9 +106,9 @@ def delete(
 ) -> FlightLogModel:
     """Delete the report with the specified ID."""
     context = FlightLogsContext(db)
-    flight_log = context.delete(flight_log_id)
+    flight_log = context.delete(flight_log_id, current_user)
 
     if flight_log is None:
-        raise HTTPException(status_code=404, detail="Log not found.")
+        raise HTTPException(status_code=404, detail=f"Could not delete log: Log not found for user {current_user.user_id}.")
 
     return flight_log
