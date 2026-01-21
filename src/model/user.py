@@ -30,7 +30,7 @@ class UserCreateModel(APIModel):
 
 
 class UserRegisterModel(APIModel):
-    """User model use for reigstering new users"""
+    """User model use for registering new users"""
 
     email: str
     password: str

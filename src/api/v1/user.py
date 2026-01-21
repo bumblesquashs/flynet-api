@@ -202,7 +202,7 @@ def register(
     try:
         created_user = context.register(user)
     except IntegrityError as e:
-        raise HTTPException(status_code=400, detail="Email must be unique.") from e
+        raise HTTPException(status_code=400, detail=f"Integrity error: {''.join(e.orig.args)}") from e
 
     if created_user is None:
         raise HTTPException(status_code=400, detail="Could not create user.")

@@ -147,12 +147,12 @@ class UserContext:
         user.password = self.create_hash(user.password)
 
         db_user = User(**user.dict())
-        db_user.role_id = 3
+        db_user.role_id = 2
 
         self.db.add(db_user)
         self.db.commit()
 
-        added_user: User = self.db.query(User).filter(User.email == user.email).first()
+        added_user: User = self.db.query(User).filter(User.id == db_user.id).first()
 
         if not added_user:
             return None
