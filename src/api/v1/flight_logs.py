@@ -48,7 +48,7 @@ def details(
 ) -> FlightLogModel:
     """Get the details of a flight_log with the specified ID."""
     context = FlightLogsContext(db)
-    flight_log = context.get(flight_log_id)
+    flight_log = context.get(flight_log_id, current_user)
 
     if flight_log is None:
         raise HTTPException(status_code=404, detail="FlightLog not found.")

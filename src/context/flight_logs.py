@@ -49,10 +49,13 @@ class FlightLogsContext:
 
         return [FlightLogModel.from_orm(flight_log) for flight_log in flight_logs], db_query.count()
 
-    def get(self, flight_log_id: int) -> Optional[FlightLogModel]:
+    def get(self, flight_log_id: int, current_user: UserTokenModel) -> Optional[FlightLogModel]:
         flight_log = self.db.query(FlightLogs).filter(FlightLogs.id == flight_log_id).first()
 
         if not flight_log:
+            return None
+
+        if not flight_log.user.is_profile_public and flight_log.user.id != current_user.user_id:
             return None
 
         return FlightLogModel.from_orm(flight_log)

@@ -9,52 +9,62 @@ class UserModel(APIModel):
     """Basic user model for read operations."""
 
     id: Optional[int] = None
-    email: str
-    first_name: Optional[str] = None
-    last_name: Optional[str] = None
-    login_last_time: Optional[datetime] = None
-    login_count: Optional[int] = None
+    username: str
+    nickname: Optional[str] = None
+    email: Optional[str] = None
+    is_profile_public: Optional[bool] = False
 
     role_id: Optional[int] = None
     role: Optional[RoleModel] = None
 
 
+class UserLoginModel(UserModel):
+    """Used for the login method, that does the token oauth and also returns user fields"""
+    token: str
+    role: str
+
+
 class UserCreateModel(APIModel):
     """User model use for creating new users"""
 
-    email: str
+    username: str
     password: str
-    first_name: Optional[str] = None
-    last_name: Optional[str] = None
+    email: Optional[str]
+    nickname: Optional[str]
+    is_profile_public: bool = False
+
     role_id: Optional[int] = None
 
 
 class UserRegisterModel(APIModel):
     """User model use for registering new users"""
 
-    email: str
+    username: str
     password: str
-    first_name: Optional[str] = None
-    last_name: Optional[str] = None
+    email: Optional[str]
+    nickname: str
+    is_profile_public: bool
 
 
 class UserUpdateModel(APIModel):
     """User model used for updates, only specified fields are updated."""
 
-    email: str
+    username: str
+    email: Optional[str] = None
+    nickname: Optional[str] = None
     password: Optional[str] = None
-    first_name: Optional[str] = None
-    last_name: Optional[str] = None
     role_id: Optional[int] = None
+    is_profile_public: bool
 
 
 class UserProfileUpdateModel(APIModel):
     """User Profile model used for updating current Users account details."""
 
+    username: str
     email: Optional[str] = None
+    nickname: Optional[str] = None
     password: Optional[str] = None
-    first_name: Optional[str] = None
-    last_name: Optional[str] = None
+    is_profile_public: bool
 
 
 class UserPopulateModel(UserCreateModel):
@@ -66,7 +76,7 @@ class UserPopulateModel(UserCreateModel):
 class UserCredentialsModel(APIModel):
     """Used for authentication only."""
 
-    email: str
+    username: str
     password: str
     scopes: Optional[List[str]]
 
@@ -76,9 +86,14 @@ class UserEmailModel(APIModel):
 
     email: str
 
+class UserUsernameModel(APIModel):
+    """Used to search for user by username only."""
+
+    username: str
+
 class AccountManagementEmailModel(APIModel):
     """Used to send account management emails."""
 
     email: str
-    name: str
+    username: str
     message: str

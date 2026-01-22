@@ -31,8 +31,8 @@ class UserContext:
         return self.crypt_context.hash(password)
 
     def validate_credentials(self, credentials: UserCredentialsModel) -> Optional[UserModel]:
-        """Validate that the email and password matches what we have in the database."""
-        user = self.db.query(User).filter(User.email == credentials.email).first()
+        """Validate that the username and password matches what we have in the database."""
+        user = self.db.query(User).filter(User.username == credentials.username).first()
 
         if not user:
             return None
@@ -62,7 +62,7 @@ class UserContext:
         return UserModel.from_orm(user)
 
     def search(self, query: str, limit: int, offset: int, sort: str, sort_desc: bool) -> Tuple[List[UserModel], int]:
-        columns = [User.first_name, User.last_name, User.email, Role.name]
+        columns = [User.username, User.nickname, User.email, Role.name]
         db_query = build_keyword_query(columns, query, self.db.query(User).join(Role))
         db_query = build_query_sort(columns, sort, sort_desc, db_query)
 
@@ -91,18 +91,30 @@ class UserContext:
 
         return UserModel.from_orm(user)
 
+    def get_from_username(self, username: str) -> Optional[UserModel]:
+        user = self.db.query(User).filter(User.username == username).first()
+
+        if not user:
+            return None
+
+        return UserModel.from_orm(user)
+
+
     def send_email(self, user_id: int, email_request: EmailRequestBody) -> GeneralResponse:
         existing_user: User = self.db.query(User).filter(User.id == user_id).first()
 
         if existing_user is None:
-            return GeneralResponse(message="Email not found", is_success=False)
+            return GeneralResponse(message=f"User not found", is_success=False)
+
+        if existing_user.email is None:
+            return GeneralResponse(message=f"User has no email", is_success=False)
 
         api_key = settings.MAILGUN_API_KEY
         domain = settings.MAILGUN_DOMAIN
 
         email_body = {
             "from": "FlyNet <no-reply@flynet.placeholder>",
-            "to": [f"{existing_user.first_name} {existing_user.last_name}", existing_user.email],
+            "to": [f"{existing_user.username}", existing_user.email],
             "subject": email_request.subject,
             "template": "password-reset-flynet",
             "v:url": email_request.message,
@@ -135,7 +147,7 @@ class UserContext:
         self.db.add(db_user)
         self.db.commit()
 
-        added_user: User = self.db.query(User).filter(User.email == user.email).first()
+        added_user: User = self.db.query(User).filter(User.username == user.username).first()
 
         if not added_user:
             return None
@@ -168,9 +180,14 @@ class UserContext:
             user.password = self.create_hash(user.password)
             existing_user.password = user.password
 
-        existing_user.first_name = user.first_name
-        existing_user.last_name = user.last_name
-        existing_user.email = user.email
+        if user.nickname:
+            existing_user.nickname = user.nickname
+
+        if user.email:
+            existing_user.email = user.email
+
+        if user.is_profile_public:
+            existing_user.is_profile_public = user.is_profile_public
 
         role: Role = self.db.query(Role).filter(Role.id == user.role_id).first()
         if role is not None:
@@ -198,14 +215,14 @@ class UserContext:
             user.password = self.create_hash(user.password)
             existing_user.password = user.password
 
-        if user.first_name:
-            existing_user.first_name = user.first_name
-
-        if user.last_name:
-            existing_user.last_name = user.last_name
+        if user.nickname:
+            existing_user.nickname = user.nickname
 
         if user.email:
             existing_user.email = user.email
+
+        if user.is_profile_public:
+            existing_user.is_profile_public = user.is_profile_public
 
         self.db.commit()
 

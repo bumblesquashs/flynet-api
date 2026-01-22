@@ -11,7 +11,6 @@ from passlib.context import CryptContext
 from pydantic import ValidationError
 from sqlalchemy.orm import Session
 from starlette import status
-from starlette.requests import Request
 
 oauth2_auth = OAuth2PasswordBearer(
     tokenUrl="token",

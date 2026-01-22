@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List, Optional, Union
 
 from model.responses import GeneralResponse
 
@@ -12,6 +12,7 @@ from fastapi_utils.inferring_router import InferringRouter
 from model import SearchQuery, SearchResponse
 from model.requests import EmailRequestBody
 from model.role import RoleModel
+from model.responses import GeneralResponse
 from model.security import SecurityModel, TokenResponse, UserTokenModel, SecurityPasswordResetModel
 from model.user import UserCreateModel, UserModel, UserProfileUpdateModel, UserRegisterModel, UserUpdateModel, \
     UserEmailModel, AccountManagementEmailModel
@@ -44,7 +45,7 @@ def email(
         user: UserEmailModel,
         db: Session = Depends(get_db),
         crypt_context: CryptContext = Depends(get_crypt_context),
-) -> TokenResponse:
+) -> Union[GeneralResponse, TokenResponse]:
     """
     Search for user by email, if found create a JWT to send to user to reset their password.
     """
@@ -53,7 +54,7 @@ def email(
     user = context.get_from_email(user.email)
 
     if user is None:
-        return TokenResponse(access_token='fail', role='fail')
+        return GeneralResponse(message=f'No user found with associated email {user.email}', is_success=False)
     if user is None:
         raise HTTPException(status_code=HTTP_401_UNAUTHORIZED, detail="Invalid credentials specified.")
 
@@ -183,7 +184,7 @@ def create(
     try:
         created_user = context.create(user)
     except IntegrityError as e:
-        raise HTTPException(status_code=400, detail="Email must be unique.") from e
+        raise HTTPException(status_code=400, detail="Username must be unique. Email, if provided, must also be unique.") from e
 
     if created_user is None:
         raise HTTPException(status_code=400, detail="Could not create user.")
@@ -224,7 +225,7 @@ def update(
     try:
         updated_user = context.update(user_id, user)
     except IntegrityError as e:
-        raise HTTPException(status_code=400, detail="Email must be unique.") from e
+        raise HTTPException(status_code=400, detail="Username and email must be unique") from e
 
     if updated_user is None:
         raise HTTPException(status_code=400, detail="Could not update user.")
@@ -265,7 +266,7 @@ def profile(
         updated_user = context.update_profile(int(current_user.sub), user)
 
     except IntegrityError as error:
-        raise HTTPException(status_code=400, detail="Email must be unique.") from error
+        raise HTTPException(status_code=400, detail="Username and email must be unique.") from error
 
     if updated_user is None:
         raise HTTPException(status_code=400, detail="Could not update user.")
