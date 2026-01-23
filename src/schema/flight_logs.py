@@ -11,11 +11,15 @@ class FlightLogs(Base):
     date = Column(DateTime)
     departure_time = Column(String)
     arrival_time = Column(String)
-    departure_airport = Column(String) # TODO: fk to a table of airports?
-    arrival_airport = Column(String)
     plane_model = Column(String) # TODO: fk to plane type table
     plane_registration = Column(String)
     note = Column(String)
+
+    origin_airport_id = Column(Integer, ForeignKey("airport.id"))
+    origin_airport = relationship("Airport", foreign_keys=[origin_airport_id])
+
+    destination_airport_id = Column(Integer, ForeignKey("airport.id"))
+    destination_airport = relationship("Airport", foreign_keys=[destination_airport_id])
 
     user_id = Column(Integer, ForeignKey("user.id"))
     user = relationship("User", back_populates="flight_logs")

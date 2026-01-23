@@ -397,6 +397,7 @@ timedatectl set-timezone America/Vancouver
 - Some SQL commands to fix that:
 
 ```sql
-alter SEQUENCE report_id_seq RESTART WITH 100;
+alter SEQUENCE airport_id_seq RESTART WITH 100;
+alter SEQUENCE flight_logs_id_seq RESTART WITH 100;
 alter SEQUENCE user_id_seq RESTART WITH 100;
 ```

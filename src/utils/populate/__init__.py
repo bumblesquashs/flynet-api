@@ -4,6 +4,7 @@ from utils.database import init_test_db
 
 from utils.populate.flight_logs import insert_logs
 from utils.populate.user import insert_roles, insert_users
+from utils.populate.airports import insert_airports
 
 
 def all_data(drop_db: False):
@@ -13,6 +14,7 @@ def all_data(drop_db: False):
     roles = insert_roles(local_db)
     users = insert_users(local_db, roles)  # noqa
 
+    insert_airports(local_db)
     insert_logs(local_db)
 
     return local_db

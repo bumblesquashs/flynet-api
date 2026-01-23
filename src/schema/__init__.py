@@ -3,3 +3,4 @@ def init_relationships():
     from .role import Role
     from .user import User
     from .flight_logs import FlightLogs
+    from .airports import Airport
