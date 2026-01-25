@@ -90,6 +90,23 @@ class AirportContext:
         return AirportModel.from_orm(airport)
 
 
+    def get_by_code(self, code: str) -> Optional[AirportModel]:
+
+        # Try IATA first
+        possible_airport = self.db.query(Airport).filter(Airport.iata_code == code).first()
+
+        if possible_airport:
+            return AirportModel.from_orm(possible_airport)
+
+        # Try ICAO second
+        possible_airport = self.db.query(Airport).filter(Airport.icao_code == code).first()
+
+        if not possible_airport:
+            return None
+
+        return AirportModel.from_orm(possible_airport)
+
+
     def import_from_csv(self) -> Optional[GeneralResponse]:
         airports = load_airports_from_csv()
         for airport in airports:

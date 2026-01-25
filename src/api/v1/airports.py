@@ -42,6 +42,23 @@ def import_csv(
     return context.import_from_csv()
 
 
+
+@router.get("/code/{code}")
+def details(
+        code: str,
+        db: Session = Depends(get_db),
+        # pylint: disable=unused-argument
+        current_user: UserTokenModel = Security(get_user, scopes=["user"]),
+) -> AirportModel:
+    """Get the details of a flight_log with the specified IATA or ICAO code."""
+    context = AirportContext(db)
+    airport = context.get_by_code(code)
+
+    if airport is None:
+        raise HTTPException(status_code=404, detail="Airport not found.")
+
+    return airport
+
 @router.get("/{flight_log_id}")
 def details(
         airport_id: int,

@@ -13,8 +13,6 @@ class FlightLogCreateModel(APIModel):
     date: Optional[datetime] = None
     departure_time: Optional[str] = None
     arrival_time: Optional[str] = None
-    departure_airport: Optional[str] = None
-    arrival_airport: Optional[str] = None
     plane_model: Optional[str] = None
     plane_registration: Optional[str] = None
     note: Optional[str] = None
