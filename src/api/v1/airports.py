@@ -44,7 +44,7 @@ def import_csv(
 
 
 @router.get("/code/{code}")
-def details(
+def by_code(
         code: str,
         db: Session = Depends(get_db),
         # pylint: disable=unused-argument
@@ -58,6 +58,24 @@ def details(
         raise HTTPException(status_code=404, detail="Airport not found.")
 
     return airport
+
+@router.put("/update_city/{code}/{city_name}")
+def update_city(
+        code: str,
+        city_name: str,
+        db: Session = Depends(get_db),
+        # pylint: disable=unused-argument
+        current_user: UserTokenModel = Security(get_user, scopes=["user"]),
+) -> AirportModel:
+    """Update an airports city on the fly."""
+    context = AirportContext(db)
+    airport = context.rename_city(code, city_name)
+
+    if airport is None:
+        raise HTTPException(status_code=404, detail="Airport not found.")
+
+    return airport
+
 
 @router.get("/{flight_log_id}")
 def details(
@@ -76,7 +94,7 @@ def details(
     return airport
 
 
-@router.put("/{flight_log_id}")
+@router.put("/{airport_id}")
 def update(
         airport_id: int,
         airport: AirportUpdateModel,

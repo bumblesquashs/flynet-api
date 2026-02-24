@@ -95,19 +95,18 @@ class AirportContext:
         return AirportModel.from_orm(airport)
 
 
-    def get_by_code(self, code: str) -> Optional[AirportModel]:
-
+    def find_airport_by_code(self, code: str):
         # Try IATA first
         possible_airport = self.db.query(Airport).filter(Airport.iata_code == code).first()
 
         if possible_airport:
-            return AirportModel.from_orm(possible_airport)
+            return possible_airport
 
         # Try ICAO second
         possible_airport = self.db.query(Airport).filter(Airport.icao_code == code).first()
 
         if possible_airport:
-            return AirportModel.from_orm(possible_airport)
+            return possible_airport
 
         # Try local code last
         possible_airport = self.db.query(Airport).filter(Airport.local_code == code).first()
@@ -115,8 +114,30 @@ class AirportContext:
         if not possible_airport:
             return None
 
+        return possible_airport
+
+
+    def get_by_code(self, code: str) -> Optional[AirportModel]:
+
+        possible_airport = self.find_airport_by_code(code)
+
+        if possible_airport is None:
+            return None
+
         return AirportModel.from_orm(possible_airport)
 
+
+    def rename_city(self, code: str, city_name: str) -> Optional[AirportModel]:
+        airport = self.find_airport_by_code(code)
+
+        if airport is None:
+            return None
+
+        airport.city = city_name
+
+        self.db.commit()
+
+        return AirportModel.from_orm(airport)
 
     def import_from_csv(self) -> Optional[GeneralResponse]:
         airports = load_airports_from_csv()
