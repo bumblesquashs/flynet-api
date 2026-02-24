@@ -8,6 +8,7 @@ class AirportCreateModel(APIModel):
 
     icao_code: Optional[str] = None
     iata_code: Optional[str] = None
+    local_code: Optional[str] = None
     airport_name: Optional[str] = None
     lat: Optional[str] = None
     lon: Optional[str] = None
@@ -15,6 +16,7 @@ class AirportCreateModel(APIModel):
     iso_country: Optional[str] = None
     iso_region: Optional[str] = None
     airport_type: Optional[str] = None
+    city: Optional[str] = None
 
 
 class AirportModel(AirportCreateModel):

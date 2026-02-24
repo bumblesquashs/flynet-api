@@ -22,20 +22,24 @@ def load_airports_from_csv(path: str = "airports.csv") -> List[AirportCreateMode
 
         for row_number, row in enumerate(reader, start=2): # the header row is row 1
             try:
-                # to get icao code we check gps_code first, then fall back to ident
-                icao_code = row.get("gps_code") or row.get("ident")
-                icao_code = icao_code.strip() if icao_code else None
+                # icao code - try ident, but only when its no longer than 4 characters
+                icao_code = row.get("ident")
+                icao_code = icao_code.strip() if len(icao_code.strip()) <= 4 else None
 
                 iata_code = row.get("iata_code")
                 iata_code = iata_code.strip() if iata_code else None
 
-                # must have at least ICAO or IATA otherwise skippo
-                if not icao_code and not iata_code:
-                    raise ValueError("Missing both ICAO and IATA codes")
+                local_code = row.get("local_code")
+                local_code = local_code.strip() if local_code else None
+
+                # must have at least ICAO or IATA or local otherwise skippo
+                if not icao_code and not iata_code and not local_code:
+                    raise ValueError("Missing all 3 ICAO and IATA and local codes")
 
                 airport = AirportCreateModel(
                     icao_code=icao_code,
                     iata_code=iata_code,
+                    local_code=local_code,
                     airport_name=row["name"].strip(),
                     lat=row["latitude_deg"].strip(),
                     lon=row["longitude_deg"].strip(),
@@ -43,6 +47,7 @@ def load_airports_from_csv(path: str = "airports.csv") -> List[AirportCreateMode
                     iso_country=row["iso_country"].strip(),
                     iso_region=row.get("iso_region") or None,
                     airport_type=row["type"].strip(),
+                    city=row["municipality"].strip(),
                 )
 
                 airports.append(airport)
@@ -100,6 +105,12 @@ class AirportContext:
 
         # Try ICAO second
         possible_airport = self.db.query(Airport).filter(Airport.icao_code == code).first()
+
+        if possible_airport:
+            return AirportModel.from_orm(possible_airport)
+
+        # Try local code last
+        possible_airport = self.db.query(Airport).filter(Airport.local_code == code).first()
 
         if not possible_airport:
             return None
