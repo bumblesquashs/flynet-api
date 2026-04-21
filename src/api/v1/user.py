@@ -142,7 +142,7 @@ def own_profile(
 
 
 
-@router.put("/me/")
+@router.put("/me")
 def update_self(
         user: UserProfileUpdateModel,
         current_user: UserTokenModel = Security(get_user, scopes=["me"]),
