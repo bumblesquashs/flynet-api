@@ -141,6 +141,33 @@ def own_profile(
     return user
 
 
+
+@router.put("/me/")
+def update_self(
+        user: UserProfileUpdateModel,
+        current_user: UserTokenModel = Security(get_user, scopes=["me"]),
+        db: Session = Depends(get_db),
+        crypt_context: CryptContext = Depends(get_crypt_context),
+        # pylint: disable=unused-argument
+) -> UserModel:
+    """
+    Update current user entity. Gets user id from token.
+    Can send any combination of fields including email and password and username...
+    """
+    context = UserContext(db, crypt_context=crypt_context)
+
+    try:
+        updated_user = context.update_self(int(current_user.sub), user)
+
+    except IntegrityError as error:
+        raise HTTPException(status_code=400, detail="Username and email must be unique.") from error
+
+    if updated_user is None:
+        raise HTTPException(status_code=400, detail="Could not update user.")
+
+    return updated_user
+
+
 # Note: this must be located above the endpoint with the variable GET route, so that this matches first
 @router.get("/role")
 def get_roles(
@@ -249,33 +276,6 @@ def delete(
         raise HTTPException(status_code=404, detail="User not found.")
 
     return user
-
-
-@router.put("/me/")
-def update_self(
-        user: UserProfileUpdateModel,
-        current_user: UserTokenModel = Security(get_user, scopes=["me"]),
-        db: Session = Depends(get_db),
-        crypt_context: CryptContext = Depends(get_crypt_context),
-        # pylint: disable=unused-argument
-) -> UserModel:
-    """
-    Update current user entity. Gets user id from token.
-    Can send any combination of fields including email and password and username...
-    """
-    context = UserContext(db, crypt_context=crypt_context)
-
-    try:
-        updated_user = context.update_self(int(current_user.sub), user)
-
-    except IntegrityError as error:
-        raise HTTPException(status_code=400, detail="Username and email must be unique.") from error
-
-    if updated_user is None:
-        raise HTTPException(status_code=400, detail="Could not update user.")
-
-    return updated_user
-
 
 @router.delete("/delete_self/")
 def delete_self(
