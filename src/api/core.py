@@ -86,5 +86,7 @@ def login(
         is_profile_public=user.is_profile_public,
         token=access_token,
         role=user.role.slug,
-        role_id=user.role.id
+        role_id=user.role.id,
+        user_profile=user.user_profile,
+        user_profile_id=user.user_profile_id
     )
