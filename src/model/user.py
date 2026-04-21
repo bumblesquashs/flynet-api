@@ -1,8 +1,8 @@
-from datetime import datetime
 from typing import List, Optional
 
 from fastapi_utils.api_model import APIModel
 from model.role import RoleModel
+from model.user_profile import UserProfileModel
 
 
 class UserModel(APIModel):
@@ -16,6 +16,9 @@ class UserModel(APIModel):
 
     role_id: Optional[int] = None
     role: Optional[RoleModel] = None
+
+    user_profile: Optional[UserProfileModel] = None
+    user_profile_id: Optional[int] = None
 
 
 class UserLoginModel(UserModel):
@@ -42,8 +45,6 @@ class UserRegisterModel(APIModel):
     username: str
     password: str
     email: Optional[str]
-    nickname: str
-    is_profile_public: bool
 
 
 class UserUpdateModel(APIModel):
@@ -71,6 +72,7 @@ class UserPopulateModel(UserCreateModel):
     """Used with initial seed scripts; we need that ID."""
 
     id: Optional[int]
+    user_profile_id: int
 
 
 class UserCredentialsModel(APIModel):

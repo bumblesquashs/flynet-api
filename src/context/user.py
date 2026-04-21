@@ -19,6 +19,7 @@ from passlib.context import CryptContext
 from schema.role import Role
 from schema.user import User
 from sqlalchemy.orm import Session
+from schema.user_profile import UserProfile
 
 
 class UserContext:
@@ -139,10 +140,16 @@ class UserContext:
         user.password = self.create_hash(user.password)
         role: Role = self.db.query(Role).filter(Role.id == user.role_id).first()
 
+        db_profile = UserProfile()
+        self.db.add(db_profile)
+        self.db.commit()
+
         db_user = User(**user.dict())
 
         if role is not None:
             db_user.role = role
+
+        db_user.user_profile = db_profile.id
 
         self.db.add(db_user)
         self.db.commit()
@@ -158,8 +165,15 @@ class UserContext:
 
         user.password = self.create_hash(user.password)
 
+        db_profile = UserProfile()
+        self.db.add(db_profile)
+        self.db.commit()
+
         db_user = User(**user.dict())
+        db_user.is_profile_public = True
+        db_user.nickname = ""
         db_user.role_id = 2
+        db_user.user_profile = db_profile.id
 
         self.db.add(db_user)
         self.db.commit()

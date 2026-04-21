@@ -400,4 +400,6 @@ timedatectl set-timezone America/Vancouver
 alter SEQUENCE airport_id_seq RESTART WITH 100;
 alter SEQUENCE flight_logs_id_seq RESTART WITH 100;
 alter SEQUENCE user_id_seq RESTART WITH 100;
+alter SEQUENCE user_profile_id_seq RESTART WITH 100;
+
 ```

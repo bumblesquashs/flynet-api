@@ -1,4 +1,6 @@
 import uvicorn
+from starlette.staticfiles import StaticFiles
+
 from api.core import router as core_router
 from api.v1 import router as v1_router
 from core.settings import settings
@@ -11,6 +13,9 @@ from utils.populate import all_data
 app = FastAPI(
     title=settings.PROJECT_NAME, root_path=settings.HOST_PREFIX, openapi_url=f"{settings.API_V1_PREFIX}/openapi.json"
 )
+
+# Mount static files
+app.mount("/static/profile/thumbnails", StaticFiles(directory="../ProfileImages"), name="profiles")
 
 # Set all CORS enabled origins
 if settings.BACKEND_CORS_ORIGINS:

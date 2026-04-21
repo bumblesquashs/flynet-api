@@ -14,5 +14,8 @@ class User(Base):
     role_id = Column(Integer, ForeignKey("role.id"))
     role = relationship("Role", back_populates="users")
 
+    user_profile_id = Column(Integer, ForeignKey("user_profile.id"))
+    user_profile = relationship("UserProfile")
+
     # foreign key, inverse relationship
     flight_logs: FlightLogs = relationship("FlightLogs", back_populates="user")

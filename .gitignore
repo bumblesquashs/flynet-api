@@ -242,6 +242,13 @@ test.db
 .idea/aws.xml
 frontend/node_modules
 
+ProfileImages/*
+!ProfileImages/.gitkeep
+!ProfileImages/abbyfour.png
+!ProfileImages/abbyfour_thumbnail.png
+!ProfileImages/victoria.png
+!ProfileImages/victoria_thumbnail.png
+
 # .DS_Store
 .DS_Store
 src/.DS_Store
