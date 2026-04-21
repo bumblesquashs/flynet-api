@@ -61,11 +61,11 @@ class UserUpdateModel(APIModel):
 class UserProfileUpdateModel(APIModel):
     """User Profile model used for updating current Users account details."""
 
-    username: str
+    username: Optional[str] = None
     email: Optional[str] = None
     nickname: Optional[str] = None
     password: Optional[str] = None
-    is_profile_public: bool
+    is_profile_public: Optional[bool] = None
 
 
 class UserPopulateModel(UserCreateModel):

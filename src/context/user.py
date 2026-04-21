@@ -235,7 +235,10 @@ class UserContext:
         if user.email:
             existing_user.email = user.email
 
-        if user.is_profile_public:
+        if user.username:
+            existing_user.username = user.username
+
+        if user.is_profile_public is not None:
             existing_user.is_profile_public = user.is_profile_public
 
         self.db.commit()
