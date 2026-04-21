@@ -251,19 +251,22 @@ def delete(
     return user
 
 
-@router.put("/profile/")
-def profile(
+@router.put("/me/")
+def update_self(
         user: UserProfileUpdateModel,
         current_user: UserTokenModel = Security(get_user, scopes=["me"]),
         db: Session = Depends(get_db),
         crypt_context: CryptContext = Depends(get_crypt_context),
         # pylint: disable=unused-argument
 ) -> UserModel:
-    """Update current user entity."""
+    """
+    Update current user entity. Gets user id from token.
+    Can send any combination of fields including email and password and username...
+    """
     context = UserContext(db, crypt_context=crypt_context)
 
     try:
-        updated_user = context.update_profile(int(current_user.sub), user)
+        updated_user = context.update_self(int(current_user.sub), user)
 
     except IntegrityError as error:
         raise HTTPException(status_code=400, detail="Username and email must be unique.") from error
@@ -274,8 +277,8 @@ def profile(
     return updated_user
 
 
-@router.delete("/delete_profile/")
-def delete_profile(
+@router.delete("/delete_self/")
+def delete_self(
         db: Session = Depends(get_db),
         current_user: UserTokenModel = Security(get_user, scopes=["me"]),
         crypt_context: CryptContext = Depends(get_crypt_context),

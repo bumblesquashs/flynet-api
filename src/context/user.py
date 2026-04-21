@@ -220,7 +220,7 @@ class UserContext:
 
         return UserModel.from_orm(updated_user)
 
-    def update_profile(self, user_id: int, user: UserProfileUpdateModel) -> Optional[UserModel]:
+    def update_self(self, user_id: int, user: UserProfileUpdateModel) -> Optional[UserModel]:
         existing_user = self.db.query(User).filter(User.id == user_id).first()
         if not existing_user:
             return None
