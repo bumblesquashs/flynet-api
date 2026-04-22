@@ -1,0 +1,38 @@
+Date,Airline,Flight Number,Depart,Arrive,Build Year,Type,Code,Registration,Engine,Departure Time,Arrival Time,Note
+5/3/2016,Horizon Air / Alaska Airlines,Alaska 2363,YVR,SEA,,DHC-8 Q400,DHC8,,PWC PW150A,9:00,5:00,Alaska Start
+5/3/2016,Alaska Airlines,Alaska 147,Sea-Tac,ANC,,B737-990ER,B739,N468AS,CFM56-7B,2:12 PM,10:32 AM,Alaska Start
+5/11/2016,Alaska Airlines,Alaska 80,Anchorage,Seattle,,B737-490,B734,,CFM56-3,15:52:22,22:12,Alaska End
+5/11/2016,Horizon Air / Alaska Airlines,Alaska 2314,Seattle,Vancouver International Airport,,DHC-8 Q400,DHC8,,PWC PW150A,,,Alaska End
+12/31/2017,Air Canada,AC126,Vancouver,Toronto,2017,B787-9,B789,C-FSBV,GEnx,,,Toronto Move Out
+4/26/2018,Air Canada,AC123,Toronto,Vancouver,2014,B777-333ER,B77W,C-FNNW,GE90-115B,,,"Vancouver Visit Start - was a 321 in my memory and on FR24, but not other sites... it showed C-FIVW 77W"
+4/29/2018,Air Canada,AC126,Vancouver,Toronto,,A321-200,A321,,CFM56,,,Vancouver Visit End
+8/24/2018,Air Canada,AC123,Toronto,Vancouver,2013,B777-333ER,B77W,C-FNNU,GE90-115B,,,Toronto Move Back
+5/27/2022,Lufthansa,LH493,Vancouver,Frankfurt,1998,B747-430,B744,D-ABVU,GE CF6,,,Europe Start
+6/15/2022,Edelweiss Air,WK10,Zürich,Vancouver,2003,A340-313,A343,HB-JMF,CFM56-5C4,,,Europe End
+5/2/2023,Air North,4N511,Vancouver,Victoria,1993,B737-505,B735,C-GANH,CFM56-3C1,,,Victoria Daytrip
+10/19/2023,Flair Airlines,F8802,YVR,YYC,2019,B737 MAX 8,B7M8,C-FFLZ,CFM LEAP 1B,,,Visit RN
+10/23/2023,Flair Airlines,F8807,CYYC,CYVR,2019,B737 MAX 8,B7M8,C-FLKC,CFM LEAP 1B,,,Visit RN
+3/9/2024,Air Canada,AC554,Vancouver,Los Angeles,2018,B737 MAX 8,B7M8,C-FSIP,CFM LEAP 1B,,,Japan YVR to LAX
+3/9/2024,All Nippon Airways,NH125,Los Angeles,Tokyo Haneda,2013,B787-8,B788,JA822A,RR Trent 1000,,,Japan LAX to HND
+3/22/2024,Japan Airlines,JL646,Kagoshima,Tokyo Haneda,2009,B767-346ER,B763,JA623J,GE CF6,,,Japan KOJ to HND
+3/23/2024,All Nippon Airways,NH116,Tokyo Haneda,Vancouver,2016,B787-9,B789,JA885A,RR Trent 1000,,,Japan HND to YVR
+7/10/2024,Flair Airlines,F8802,Vancouver,Calgary,2010,B737-86J,B738,C-FFLC,CFM56-7B,,,Visiting Reed
+7/14/2024,Jazz Aviation / Air Canada Express,AC8134,Calgary,Edmonton,2011,DHC-8 Q400,DHC8,C-GGND,PWC PW150A,,,Visiting Reed
+7/14/2024,Air Canada,AC243,Edmonton,Vancouver,2007,A320-214,A320,C-FCQD,CFM56-5B4,,,Visiting Reed
+2/14/2025,Air Canada,AC200,Vancouver,Calgary,2006,A320-214,A320,C-FCUG,CFM56-5B4,,,Rockies 2025
+2/17/2025,Westjet,WS129,Calgary,Vancouver,2003,B737-7CT,B737,C-GWBT,CFM56-7B,,,Rockies 2025
+3/14/2025,Air Canada,AC517,Vancouver,Honolulu,2019,B737 MAX 8,B7M8,C-FSDB,CFM LEAP 1B,,,Japaustralia
+3/14/2025,Delta Airlines,DL181,Honolulu,Tokyo Haneda,1998,B767-332ER,B763,N1201P,PW 4060,,,Japaustralia
+3/23/2025,Japan Airlines,JL51,Tokyo Haneda,Sydney,2008,B777-346ER,B77W,JA739J,GE90-115B,,,Japaustralia
+3/26/2025,Jetstar,JQ603,Sydney,Avalon,2010,A320-232,A320,VH-VGV,IAE V2527-A5,,,Japaustralia
+3/26/2025,Jetstar,JQ612,Avalon,Sydney,2010,A320-232,A320,VH-VGQ,IAE V2527-A5,,,Japaustralia
+3/31/2025,Air Canada,AC34,Sydney,Vancouver,2008,B777-233LR,B77L,C-FNND,GE90-115B,,,Japaustralia
+10/17/2025,Flair Airlines,F8808,Vancouver,Calgary,2019,B737 MAX 8,B7M8,C-GFOF,CFM LEAP 1B,,,Calgary 2025
+10/23/2025,Flair Airlines,F8805,Calgary,Vancouver,2020,B737 MAX 8,B7M8,C-FLGD,CFM LEAP 1B,,,Calgary 2025
+3/14/2026,Jazz Aviation / Air Canada Express,AC8846,Vancouver,San Francisco,2016,CRJ-900LR,CRJ9,C-GJZS,GE CF34-8C5,,,Europe 2026
+3/14/2026,Lufthansa,LH459,San Francisco,Munich,2010,A380-841,A388,D-AIMB,RR Trent 970,,,Europe 2026
+3/15/2026,Lufthansa CityLine,LH1694,Munich,Prague,2005,A319-112,A319,D-AIBP,CFM56,,,Europe 2026
+3/18/2026,Swiss,LX1485,Prague,Zurich,2018,A220-300,BCS3,HB-JCI,PW1500G,,,Europe 2026
+3/18/2026,AirBaltic (on behalf of Swiss),LX1662,Zurich,Venice,2020,A220-300,BCS3,YL-AAX,PW1500G,,,Europe 2026
+3/28/2026,Air Dolomiti,EN8861,Florence,Frankfurt,2010,E190LR,E190,I-JENJ,GE CF34-10E7,,,Europe 2026
+3/28/2026,Lufthansa,LH492,Frankfurt,Vancouver,1998,A340-313,A343,D-AIGN,CFM56-5C4,,,Europe 2026

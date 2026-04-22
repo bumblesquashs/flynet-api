@@ -86,7 +86,7 @@ class FlightLogsContext:
 
         created_id = db_flight_log.id
 
-        added_flight_log: FlightLogs = self.db.query(FlightLogs).filter(FlightLogs.id == created_id).first()
+        added_flight_log: FlightLogs | None = self.db.query(FlightLogs).filter(FlightLogs.id == created_id).first()
 
         if not added_flight_log:
             return None
@@ -94,7 +94,7 @@ class FlightLogsContext:
         return FlightLogModel.from_orm(added_flight_log)
 
     def update(self, flight_log_id: int, flight_log: FlightLogUpdateModel, current_user: UserTokenModel) -> Optional[FlightLogModel]:
-        existing_flight_log: FlightLogs = self.db.query(FlightLogs).filter(FlightLogs.id == flight_log_id).first()
+        existing_flight_log: FlightLogs | None = self.db.query(FlightLogs).filter(FlightLogs.id == flight_log_id).first()
         if not existing_flight_log:
             return None
 
@@ -110,7 +110,7 @@ class FlightLogsContext:
 
         self.db.commit()
 
-        updated_flight_log: FlightLogs = self.db.query(FlightLogs).filter(FlightLogs.id == flight_log_id).first()
+        updated_flight_log: FlightLogs | None = self.db.query(FlightLogs).filter(FlightLogs.id == flight_log_id).first()
 
         if not updated_flight_log:
             return None

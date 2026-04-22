@@ -1,20 +1,52 @@
 from typing import Optional
 
 from context.flight_logs import FlightLogsContext
-from starlette.responses import StreamingResponse
+from context.csv_import import ImportContext
 
-from context.flight_logs import FlightLogsContext
 from core.dependencies import get_db, get_user
-from fastapi import Depends, HTTPException, Security
+from fastapi import Depends, File, HTTPException, Security, UploadFile
 from fastapi_utils.inferring_router import InferringRouter
 from model import SearchResponse
 from model.flight_logs import FlightLogCreateModel, FlightLogModel, FlightLogUpdateModel
-from model.responses import GeneralResponse
+from model.responses import ImportResponse
 from model.security import UserTokenModel
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 router = InferringRouter()
+
+
+def validate_spreadsheet_filename(filename):
+    return filename.split(".")[-1].lower() in ["csv"]
+
+
+@router.put("/import_csv")
+def import_csv(
+    flight_log_csv: UploadFile = File(...),
+    db: Session = Depends(get_db),
+    # pylint: disable=unused-argument
+    current_user: UserTokenModel = Security(get_user, scopes=["user"]),
+) -> ImportResponse:
+    """
+    Import a csv of flight logs for user, create the records and update associations with airport.
+    Non destructive, so it will update existing rows.
+    """
+
+    if not validate_spreadsheet_filename(flight_log_csv.filename):
+        return ImportResponse(
+            message=f"Error: {flight_log_csv.filename}: Flight log file must be a CSV spreadsheet (ending in .csv)",
+            is_success=False,
+            num_created=0,
+            num_updated=0
+        )
+
+    context = ImportContext(db)
+    response = context.import_flight_log_csv(flight_log_csv, current_user)
+
+    if response.is_success is False:
+        raise HTTPException(status_code=400, detail=response.message)
+
+    return response
 
 
 @router.get("/")

@@ -21,6 +21,11 @@ class FlightLogCreateModel(APIModel):
     destination_airport_id: Optional[int] = None
 
 
+class FlightLogImportModel(FlightLogCreateModel):
+    """Model used when importing logs"""
+    user_id: int
+
+
 class FlightLogModel(FlightLogCreateModel):
     """Model representing one flight log in the user's history"""
     user: Optional[UserModel] = None
