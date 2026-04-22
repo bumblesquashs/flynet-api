@@ -252,12 +252,13 @@ class ImportContext:
                 continue
 
             # We check to see if someone has already put this flight in
+            # Our definition of an "already added" flight: same user, same date, same flight number from same origin
             existing_flight_log: FlightLogs = (
                 self.db.query(FlightLogs)
+                    .filter(FlightLogs.user_id == user_id)
                     .filter(FlightLogs.date == new_flight_log.date)
                     .filter(FlightLogs.flight_number == new_flight_log.flight_number)
                     .filter(FlightLogs.origin_airport_id == new_flight_log.origin_airport_id)
-                    .filter(FlightLogs.destination_airport_id == new_flight_log.destination_airport_id)
                     .first()
             )
 
