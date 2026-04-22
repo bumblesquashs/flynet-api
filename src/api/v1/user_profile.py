@@ -55,17 +55,10 @@ def update_profile_photo(
         result = context.set_profile_photo(user_profile_id, image)
     except IntegrityError as e:
         raise HTTPException(status_code=400, detail=f"Integrity error: {''.join(e.orig.args)}") from e
-
     if result is None:
-        return GeneralResponse(
-            is_success=False,
-            message=f"Profile with ID {user_profile_id} not found"
-        )
+        raise HTTPException(status_code=400, detail=f"Profile with ID {user_profile_id} not found")
     elif result is False:
-        return GeneralResponse(
-            is_success=False,
-            message="Failed to save or process the image. Please ensure you uploaded a valid image file (PNG, JPG)"
-        )
+        raise HTTPException(status_code=400, detail="Failed to save or process the image. Please ensure you uploaded a valid image file (PNG, JPG)")
     else:
         return GeneralResponse(
             is_success=True,

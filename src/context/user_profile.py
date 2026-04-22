@@ -26,15 +26,18 @@ def _is_valid_image(file: UploadFile) -> bool:
     Check if the uploaded file is a valid image format
     """
     if not file.filename:
+        print('validate profile photo debug:   no filename')
         return False
 
     # Check file extension
     file_ext = os.path.splitext(file.filename.lower())[1]
     if file_ext not in ALLOWED_EXTENSIONS:
+        print('validate profile photo debug:   bad file extension')
         return False
 
     # Check content type
     if file.content_type not in ALLOWED_CONTENT_TYPES:
+        print('validate profile photo debug:   bad content type')
         return False
 
     return True
@@ -81,7 +84,7 @@ def save_new_image(image: UploadFile) -> Optional[str]:
     try:
         # Validate image
         if not _is_valid_image(image):
-            print(f"Invalid image format: {image.filename}")
+            print(f"new profile photo debug: nvalid image format: {image.filename}")
             return None
 
         # Ensure directory exists
@@ -109,6 +112,7 @@ def save_new_image(image: UploadFile) -> Optional[str]:
 
         # Create thumbnail
         if not _create_thumbnail(image_path, thumbnail_path):
+            print('new profile photo debug: thumbnail creation failed, cleaning up')
             # If thumbnail creation fails, clean up and return None
             if os.path.exists(image_path):
                 os.remove(image_path)
@@ -120,7 +124,7 @@ def save_new_image(image: UploadFile) -> Optional[str]:
         return image_uuid
 
     except Exception as e:
-        print(f"Error saving image: {e}")
+        print(f"new profile photo debug: error saving image: {e}")
         return None
 
 
@@ -132,7 +136,7 @@ def update_image(image: UploadFile, existing_image_uuid: str) -> bool:
     try:
         # Validate image
         if not _is_valid_image(image):
-            print(f"Invalid image format: {image.filename}")
+            print(f"update profile photo debug: invalid image format: {image.filename}")
             return False
 
         # Get file extension
@@ -164,7 +168,7 @@ def update_image(image: UploadFile, existing_image_uuid: str) -> bool:
             existing_thumbnail_path = potential_thumbnail
 
         if not existing_image_path:
-            print(f"Existing image not found for UUID: {existing_image_uuid}")
+            print(f"update profile photo debug: existing image not found for UUID: {existing_image_uuid}")
             return False
 
         # Remove old files
@@ -180,6 +184,9 @@ def update_image(image: UploadFile, existing_image_uuid: str) -> bool:
 
         # Create new thumbnail
         if not _create_thumbnail(image_path, thumbnail_path):
+            print(f"update profile photo debug: create thumbnail failed, cleaning up")
+            if os.path.exists(image_path):
+                os.remove(image_path)
             return False
 
         # Reset file position for potential future reads
@@ -188,7 +195,7 @@ def update_image(image: UploadFile, existing_image_uuid: str) -> bool:
         return True
 
     except Exception as e:
-        print(f"Error updating image: {e}")
+        print(f"update profile photo debug: exception updating image: {e}")
         return False
 
 
@@ -218,16 +225,23 @@ class UserProfileContext:
 
 
         if not profile:
+            print('profile photo debug:   no profile')
             return None
 
         if profile.image_uuid:
             # already has a photo, so update, return bool
-            return update_image(image, profile.image_uuid)
+            print('update profile photo debug:   beginning update')
+            result = update_image(image, profile.image_uuid)
+            if result:
+                print('update profile photo debug:   done')
+            return result
 
         # doesn't have one yet
+        print('create profile photo debug:   beginning create')
         uuid_str = save_new_image(image)
 
         if uuid_str is None:
+            print('create profile photo debug:   no uuid was returned from create, failing')
             return False  # Failure!
 
         profile.image_uuid = uuid_str
@@ -235,6 +249,7 @@ class UserProfileContext:
 
         self.db.commit()
 
+        print('create profile photo debug:   done')
         return True
 
 
