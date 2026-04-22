@@ -84,7 +84,7 @@ def save_new_image(image: UploadFile) -> Optional[str]:
     try:
         # Validate image
         if not _is_valid_image(image):
-            print(f"new profile photo debug: nvalid image format: {image.filename}")
+            print(f"new profile photo debug: invalid image format: {image.filename}")
             return None
 
         # Ensure directory exists
@@ -230,14 +230,12 @@ class UserProfileContext:
 
         if profile.image_uuid:
             # already has a photo, so update, return bool
-            print('update profile photo debug:   beginning update')
             result = update_image(image, profile.image_uuid)
             if result:
                 print('update profile photo debug:   done')
             return result
 
         # doesn't have one yet
-        print('create profile photo debug:   beginning create')
         uuid_str = save_new_image(image)
 
         if uuid_str is None:
