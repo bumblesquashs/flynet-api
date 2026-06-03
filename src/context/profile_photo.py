@@ -5,11 +5,9 @@ from typing import Optional
 from fastapi import UploadFile
 from openpyxl.drawing.image import PILImage
 
-from model.user_profile import UserProfileModel, UserProfileUpdateModel
 from sqlalchemy.orm import Session
 
 from schema.user import User
-from schema.user_profile import UserProfile
 
 
 profile_image_base_path = '../ProfileImages/'
@@ -199,21 +197,11 @@ def update_image(image: UploadFile, existing_image_uuid: str) -> bool:
         return False
 
 
-class UserProfileContext:
+class ProfilePhotoContext:
     def __init__(self, db: Session):
         self.db = db
 
-
-    def get(self, user_profile_id: int) -> Optional[UserProfile]:
-        user_profile = self.db.query(UserProfile).filter(UserProfile.id == user_profile_id).first()
-
-        if not user_profile:
-            return None
-
-        return UserProfile.from_orm(user_profile)
-
-
-    def set_profile_photo(self, user_profile_id: int, image):
+    def set_profile_photo(self, user_id: int, image):
         '''
         Used to set the image on user profile create or user profile image update
         :param user_profile_id:
@@ -221,16 +209,15 @@ class UserProfileContext:
         :param image:
         :return:
         '''
-        profile = self.db.query(UserProfile).filter(UserProfile.id == user_profile_id).first()
+        user = self.db.query(User).filter(User.id == user_id).first()
 
-
-        if not profile:
-            print('profile photo debug:   no profile')
+        if not user:
+            print('profile photo debug:   no user object')
             return None
 
-        if profile.image_uuid:
+        if user.image_uuid:
             # already has a photo, so update, return bool
-            result = update_image(image, profile.image_uuid)
+            result = update_image(image, user.image_uuid)
             if result:
                 print('update profile photo debug:   done')
             return result
@@ -242,8 +229,8 @@ class UserProfileContext:
             print('create profile photo debug:   no uuid was returned from create, failing')
             return False  # Failure!
 
-        profile.image_uuid = uuid_str
-        profile.image_path = f'static/profile/thumbnails/{uuid_str}_thumbnail.jpg'
+        user.image_uuid = uuid_str
+        user.image_path = f'static/profile/thumbnails/{uuid_str}_thumbnail.jpg'
 
         self.db.commit()
 
@@ -251,26 +238,5 @@ class UserProfileContext:
         return True
 
 
-
-    def update(self, user_profile_id: int, user_profile: UserProfileUpdateModel) -> Optional[UserProfileModel]:
-        existing_user_profile: UserProfile = self.db.query(UserProfile).filter(UserProfile.id == user_profile_id).first()
-        if not existing_user_profile:
-            return None
-
-        # Iterate over flight_log object's fields to set the fields in the db object
-        # This is less clean but much more concise than specifying all fields again
-        user_profile_dict = vars(user_profile)
-        for key in user_profile_dict:
-            if user_profile_dict[key] is not None:
-                setattr(existing_user_profile, key, user_profile_dict[key])
-
-        self.db.commit()
-
-        updated_profile: UserProfile = self.db.query(UserProfile).filter(UserProfile.id == user_profile_id).first()
-
-        if not updated_profile:
-            return None
-
-        return UserProfileModel.from_orm(updated_profile)
 
 

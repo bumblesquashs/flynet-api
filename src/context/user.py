@@ -8,18 +8,20 @@ from core.settings import settings
 from model.requests import EmailRequestBody
 from model.responses import GeneralResponse
 from model.user import (
-    UserCreateModel,
+    UserCreateModelAdmin,
     UserCredentialsModel,
     UserModel,
-    UserProfileUpdateModel,
+    UserModelPublic,
+    UserModelPrivate,
     UserRegisterModel,
     UserUpdateModel,
+    UserUpdateModelAdmin,
 )
 from passlib.context import CryptContext
 from schema.role import Role
 from schema.user import User
 from sqlalchemy.orm import Session
-from schema.user_profile import UserProfile
+from schema.user_settings import UserSettings
 
 
 class UserContext:
@@ -62,44 +64,130 @@ class UserContext:
 
         return UserModel.from_orm(user)
 
-    def search(self, query: str, limit: int, offset: int, sort: str, sort_desc: bool) -> Tuple[List[UserModel], int]:
-        columns = [User.username, User.nickname, User.email, Role.name]
-        db_query = build_keyword_query(columns, query, self.db.query(User).join(Role))
+
+    def public_search(self, query: str, limit: int, offset: int, sort: str, sort_desc: bool) -> Tuple[List[UserModel], int]:
+        columns = [User.username]
+        db_query = build_keyword_query(columns, query, self.db.query(User))
         db_query = build_query_sort(columns, sort, sort_desc, db_query)
+        db_query = db_query.filter(User.is_profile_public == True)
 
         user_count = db_query.count()
 
-        users_model: List[UserModel] = []
+        user_models: List[UserModelPublic] = []
         users = db_query.offset(offset).limit(limit).all()
         for user in users:
-            users_model.append(UserModel.from_orm(user))
+            user_models.append(UserModelPublic.from_orm(user))
 
-        return users_model, user_count
+        return user_models, user_count
 
-    def get(self, user_id: int) -> Optional[UserModel]:
-        user = self.db.query(User).filter(User.id == user_id).first()
 
-        if not user:
-            return None
-
-        return UserModel.from_orm(user)
-
-    def get_from_email(self, email: str) -> Optional[UserModel]:
-        user = self.db.query(User).filter(User.email == email).first()
-
-        if not user:
-            return None
-
-        return UserModel.from_orm(user)
-
-    def get_from_username(self, username: str) -> Optional[UserModel]:
+    def get_by_username_public(self, username: str) -> Optional[UserModelPublic]:
         user = self.db.query(User).filter(User.username == username).first()
 
         if not user:
             return None
 
-        return UserModel.from_orm(user)
+        if not user.is_profile_public:
+            return None
 
+        return UserModelPublic.from_orm(user)
+
+
+    def get_by_id_public(self, user_id: int) -> Optional[UserModelPublic]:
+        user = self.db.query(User).filter(User.id == user_id).first()
+
+        if not user:
+            return None
+
+        if not user.is_profile_public:
+            return None
+
+        return UserModelPublic.from_orm(user)
+
+
+    def get_self(self, user_id: int) -> Optional[UserModelPrivate]:
+        user = self.db.query(User).filter(User.id == user_id).first()
+
+        if not user:
+            return None
+
+
+        return UserModelPrivate.from_orm(user)
+
+
+    def update_self(self, user_id: int, user: UserUpdateModel) -> Optional[UserModelPrivate]:
+        existing_user = self.db.query(User).filter(User.id == user_id).first()
+        if not existing_user:
+            return None
+
+        if user.password:
+            user.password = self.create_hash(user.password)
+            existing_user.password = user.password
+
+        if user.nickname:
+            existing_user.nickname = user.nickname
+
+        if user.email:
+            existing_user.email = user.email
+
+        if user.username:
+            existing_user.username = user.username
+
+        if user.bio:
+            existing_user.bio = user.bio
+
+        if user.is_profile_public is not None:
+            existing_user.is_profile_public = user.is_profile_public
+
+        self.db.commit()
+
+        updated_user: User = self.db.query(User).filter(User.id == user_id).first()
+
+        if not updated_user:
+            return None
+
+        return UserModelPrivate.from_orm(updated_user)
+
+    # ===========================================
+    # Account management - no UI using this yet
+    # ===========================================
+
+    def register(self, user: UserRegisterModel) -> Optional[UserModelPrivate]:
+
+        user.password = self.create_hash(user.password)
+
+        db_settings = UserSettings()
+        self.db.add(db_settings)
+        self.db.commit()
+
+        db_user = User(**user.dict())
+        db_user.is_profile_public = True
+        db_user.nickname = ""
+        db_user.role_id = 2
+        db_user.user_settings = db_settings.id
+
+        self.db.add(db_user)
+        self.db.commit()
+
+        added_user: User = self.db.query(User).filter(User.id == db_user.id).first()
+
+        if not added_user:
+            return None
+
+        return UserModelPrivate.from_orm(added_user)
+
+
+    def delete(self, user_id: int) -> Optional[UserModel]:
+        user = self.db.query(User).filter(User.id == user_id).first()
+        if not user:
+            return None
+
+        result = UserModel.from_orm(user)
+
+        self.db.delete(user)
+        self.db.commit()
+
+        return result
 
     def send_email(self, user_id: int, email_request: EmailRequestBody) -> GeneralResponse:
         existing_user: User = self.db.query(User).filter(User.id == user_id).first()
@@ -135,13 +223,48 @@ class UserContext:
 
         return GeneralResponse(message="all good!", is_success=True)
 
+    def get_from_email(self, email: str) -> Optional[UserModel]:
+        user = self.db.query(User).filter(User.email == email).first()
 
-    def create(self, user: UserCreateModel) -> Optional[UserModel]:
+        if not user:
+            return None
+
+        return UserModel.from_orm(user)
+
+    # ===========================================
+    # ADMIN Functionality - no UI using this yet
+    # ===========================================
+
+    def admin_search(self, query: str, limit: int, offset: int, sort: str, sort_desc: bool) -> Tuple[List[UserModel], int]:
+        columns = [User.username, User.nickname, User.email, Role.name]
+        db_query = build_keyword_query(columns, query, self.db.query(User).join(Role))
+        db_query = build_query_sort(columns, sort, sort_desc, db_query)
+
+        user_count = db_query.count()
+
+        users_model: List[UserModel] = []
+        users = db_query.offset(offset).limit(limit).all()
+        for user in users:
+            users_model.append(UserModel.from_orm(user))
+
+        return users_model, user_count
+
+
+    def get_admin(self, user_id: int) -> Optional[UserModel]:
+        user = self.db.query(User).filter(User.id == user_id).first()
+
+        if not user:
+            return None
+
+        return UserModel.from_orm(user)
+
+
+    def create_admin(self, user: UserCreateModelAdmin) -> Optional[UserModel]:
         user.password = self.create_hash(user.password)
         role: Role = self.db.query(Role).filter(Role.id == user.role_id).first()
 
-        db_profile = UserProfile()
-        self.db.add(db_profile)
+        db_settings = UserSettings()
+        self.db.add(db_settings)
         self.db.commit()
 
         db_user = User(**user.dict())
@@ -149,7 +272,7 @@ class UserContext:
         if role is not None:
             db_user.role = role
 
-        db_user.user_profile = db_profile.id
+        db_user.user_settings = db_settings.id
 
         self.db.add(db_user)
         self.db.commit()
@@ -161,31 +284,8 @@ class UserContext:
 
         return UserModel.from_orm(added_user)
 
-    def register(self, user: UserRegisterModel) -> Optional[UserModel]:
 
-        user.password = self.create_hash(user.password)
-
-        db_profile = UserProfile()
-        self.db.add(db_profile)
-        self.db.commit()
-
-        db_user = User(**user.dict())
-        db_user.is_profile_public = True
-        db_user.nickname = ""
-        db_user.role_id = 2
-        db_user.user_profile = db_profile.id
-
-        self.db.add(db_user)
-        self.db.commit()
-
-        added_user: User = self.db.query(User).filter(User.id == db_user.id).first()
-
-        if not added_user:
-            return None
-
-        return UserModel.from_orm(added_user)
-
-    def update(self, user_id: int, user: UserUpdateModel) -> Optional[UserModel]:
+    def update_admin(self, user_id: int, user: UserUpdateModelAdmin) -> Optional[UserModel]:
         existing_user: User = self.db.query(User).filter(User.id == user_id).first()
         if not existing_user:
             return None
@@ -220,44 +320,7 @@ class UserContext:
 
         return UserModel.from_orm(updated_user)
 
-    def update_self(self, user_id: int, user: UserProfileUpdateModel) -> Optional[UserModel]:
-        existing_user = self.db.query(User).filter(User.id == user_id).first()
-        if not existing_user:
-            return None
 
-        if user.password:
-            user.password = self.create_hash(user.password)
-            existing_user.password = user.password
 
-        if user.nickname:
-            existing_user.nickname = user.nickname
 
-        if user.email:
-            existing_user.email = user.email
 
-        if user.username:
-            existing_user.username = user.username
-
-        if user.is_profile_public is not None:
-            existing_user.is_profile_public = user.is_profile_public
-
-        self.db.commit()
-
-        updated_user: User = self.db.query(User).filter(User.id == user_id).first()
-
-        if not updated_user:
-            return None
-
-        return UserModel.from_orm(updated_user)
-
-    def delete(self, user_id: int) -> Optional[UserModel]:
-        user = self.db.query(User).filter(User.id == user_id).first()
-        if not user:
-            return None
-
-        result = UserModel.from_orm(user)
-
-        self.db.delete(user)
-        self.db.commit()
-
-        return result

@@ -4,3 +4,4 @@ def init_relationships():
     from .user import User
     from .flight_logs import FlightLogs
     from .airports import Airport
+    from .user_settings import UserSettings

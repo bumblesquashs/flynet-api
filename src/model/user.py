@@ -2,7 +2,7 @@ from typing import List, Optional
 
 from fastapi_utils.api_model import APIModel
 from model.role import RoleModel
-from model.user_profile import UserProfileModel
+from model.user_settings import UserSettingsModel
 
 
 class UserModel(APIModel):
@@ -13,12 +13,33 @@ class UserModel(APIModel):
     nickname: Optional[str] = None
     email: Optional[str] = None
     is_profile_public: Optional[bool] = False
+    bio: Optional[str] = None
+
+    image_uuid: Optional[str] = None
+    image_path: Optional[str] = None
 
     role_id: Optional[int] = None
     role: Optional[RoleModel] = None
 
-    user_profile: Optional[UserProfileModel] = None
-    user_profile_id: Optional[int] = None
+    user_settings: Optional[UserSettingsModel] = None
+    user_settings_id: Optional[int] = None
+
+
+class UserModelPublic(UserModel):
+    """User model for public access, used when querying other users."""
+    id: Optional[int] = None
+    username: str
+    nickname: Optional[str] = None
+    bio: Optional[str] = None
+
+    image_uuid: Optional[str] = None
+    image_path: Optional[str] = None
+
+
+class UserModelPrivate(UserModel):
+    """User model for loading own profile, includes settings role and email"""
+    pass
+
 
 
 class UserLoginModel(UserModel):
@@ -27,13 +48,14 @@ class UserLoginModel(UserModel):
     role: str
 
 
-class UserCreateModel(APIModel):
+class UserCreateModelAdmin(APIModel):
     """User model use for creating new users"""
 
     username: str
     password: str
     email: Optional[str]
     nickname: Optional[str]
+    bio: Optional[str] = None
     is_profile_public: bool = False
 
     role_id: Optional[int] = None
@@ -47,7 +69,7 @@ class UserRegisterModel(APIModel):
     email: Optional[str]
 
 
-class UserUpdateModel(APIModel):
+class UserUpdateModelAdmin(APIModel):
     """User model used for updates, only specified fields are updated."""
 
     username: str
@@ -55,24 +77,28 @@ class UserUpdateModel(APIModel):
     nickname: Optional[str] = None
     password: Optional[str] = None
     role_id: Optional[int] = None
+    bio: Optional[str] = None
     is_profile_public: bool
 
 
-class UserProfileUpdateModel(APIModel):
+class UserUpdateModel(APIModel):
     """User Profile model used for updating current Users account details."""
 
     username: Optional[str] = None
     email: Optional[str] = None
     nickname: Optional[str] = None
     password: Optional[str] = None
+    bio: Optional[str] = None
     is_profile_public: Optional[bool] = None
 
 
-class UserPopulateModel(UserCreateModel):
+class UserPopulateModel(UserCreateModelAdmin):
     """Used with initial seed scripts; we need that ID."""
 
     id: Optional[int]
-    user_profile_id: int
+    user_settings_id: int
+    image_uuid: Optional[str] = None
+    image_path: Optional[str] = None
 
 
 class UserCredentialsModel(APIModel):

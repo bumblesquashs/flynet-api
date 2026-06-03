@@ -46,8 +46,8 @@ class Settings(BaseSettings):
     POSTGRES_EXTRAS: Optional[str] = None
     SQLALCHEMY_DATABASE_URI: Optional[str] = None
 
-    TOKEN_EXPIRES_MINUTES: int = 60 * 24 * 7
-    TOKEN_EXPIRES_MINUTES_PASS_RESET: int = 30
+    TOKEN_EXPIRES_MINUTES: int = 60 * 24 * 30  # 1 month for now
+    TOKEN_EXPIRES_MINUTES_PASS_RESET: int = 60
     TOKEN_ALGORITHM: str = "HS256"
     TOKEN_SECRET: Optional[str]
 

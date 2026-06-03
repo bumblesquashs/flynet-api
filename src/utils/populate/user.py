@@ -5,10 +5,10 @@ from model.role import RoleModel
 from model.user import UserModel, UserPopulateModel
 from passlib.context import CryptContext
 
-from model.user_profile import UserProfileModel, UserProfilePopulateModel
+from model.user_settings import UserSettingsModel, UserSettingsPopulateModel
 from schema.role import Role
 from schema.user import User
-from schema.user_profile import UserProfile
+from schema.user_settings import UserSettings
 from sqlalchemy.orm import Session
 from utils.database import get_first, insert_data
 
@@ -21,43 +21,31 @@ def insert_roles(db: Session) -> List[RoleModel]:
 
     return insert_data(db, Role, roles, RoleModel)
 
-def insert_profiles(db: Session) -> List[UserProfileModel]:
+def insert_settings(db: Session) -> List[UserSettingsModel]:
     profiles = [
-        UserProfilePopulateModel(
+        UserSettingsPopulateModel(
             id=1,
-            bio='james test bio',
             theme='',
-            ui_mode='light',
-            image_uuid=None,
-            image_path=''
+            ui_mode='light'
         ),
-        UserProfilePopulateModel(
+        UserSettingsPopulateModel(
             id=2,
-            bio='i dunno',
             theme='',
-            ui_mode='dark',
-            image_uuid = None,
-            image_path = None,
+            ui_mode='dark'
         ),
-        UserProfilePopulateModel(
+        UserSettingsPopulateModel(
             id=3,
-            bio='um ummm im flyin',
             theme='',
-            ui_mode='system',
-            image_uuid='abbyfour', # real users will get a uuid here
-            image_path="static/profile/thumbnails/abbyfour_thumbnail.png",
+            ui_mode='system'
         ),
-        UserProfilePopulateModel(
+        UserSettingsPopulateModel(
             id=4,
-            bio="",
             theme='',
-            ui_mode='system',
-            image_uuid='victoria',  # real users will get a uuid here
-            image_path="static/profile/thumbnails/victoria_thumbnail.png",
+            ui_mode='system'
         ),
     ]
 
-    return insert_data(db, UserProfile, profiles, UserProfileModel)
+    return insert_data(db, UserSettings, profiles, UserSettingsModel)
 
 def insert_users(db: Session, roles) -> List[UserModel]:
     context = UserContext(db=db, crypt_context=CryptContext(schemes=["bcrypt"], deprecated="auto"))
@@ -72,8 +60,11 @@ def insert_users(db: Session, roles) -> List[UserModel]:
             nickname="James",
             role_id=admin_role.id,
             password=context.create_hash("Testing11*"),
+            bio='james test bio',
             is_profile_public=False,
-            user_profile_id=1,
+            user_settings_id=1,
+            image_uuid=None,
+            image_path=''
         ),
         UserPopulateModel(
             id=2,
@@ -82,8 +73,11 @@ def insert_users(db: Session, roles) -> List[UserModel]:
             nickname=None,
             role_id=user_role.id,
             password=context.create_hash("Testing12*"),
+            bio='i dunno',
             is_profile_public=True,
-            user_profile_id=2,
+            user_settings_id=2,
+            image_uuid=None,
+            image_path=None
         ),
         UserPopulateModel(
             id=3,
@@ -92,8 +86,11 @@ def insert_users(db: Session, roles) -> List[UserModel]:
             email="ivison.abby@gmail.com",
             role_id=admin_role.id,
             password=context.create_hash("password"),
+            bio='um ummm im flyin',
             is_profile_public=True,
-            user_profile_id=3,
+            user_settings_id=3,
+            image_uuid='abbyfour',  # real users will get a uuid here
+            image_path="static/profile/thumbnails/abbyfour_thumbnail.png",
         ),
         UserPopulateModel(
             id=4,
@@ -102,8 +99,11 @@ def insert_users(db: Session, roles) -> List[UserModel]:
             email="emmabyron73@gmail.com",
             role_id=user_role.id,
             password=context.create_hash("K!V6R^&9k2&o7%8W"),
+            bio="",
             is_profile_public=True,
-            user_profile_id=4,
+            user_settings_id=4,
+            image_uuid='victoria',  # real users will get a uuid here
+            image_path="static/profile/thumbnails/victoria_thumbnail.png"
         ),
     ]
 
