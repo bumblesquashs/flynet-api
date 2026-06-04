@@ -89,4 +89,7 @@ def login(
         role_id=user.role.id,
         user_settings=user.user_settings,
         user_settings_id=user.user_settings_id,
+        bio=user.bio,
+        image_uuid=user.image_uuid,
+        image_path=user.image_path
     )
