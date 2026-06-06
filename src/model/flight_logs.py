@@ -40,6 +40,17 @@ class FlightLogModel(FlightLogCreateModel):
     id: Optional[int]
 
 
+class FlightLogModelPublic(FlightLogCreateModel):
+    """Model representing one flight log in the user's history"""
+    origin_airport_id: Optional[int] = None
+    destination_airport_id: Optional[int] = None
+
+    origin_airport: Optional[AirportModel] = None
+    destination_airport: Optional[AirportModel] = None
+
+    id: Optional[int]
+
+
 class FlightLogUpdateModel(FlightLogCreateModel):
     pass
 

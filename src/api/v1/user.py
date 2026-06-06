@@ -14,6 +14,7 @@ from core.dependencies import get_crypt_context, get_db, get_user
 from core.security import create_pass_reset_token
 from core.settings import settings
 from model import SearchResponse
+from model.flight_logs import FlightLogModelPublic
 from model.requests import EmailRequestBody
 from model.responses import GeneralResponse
 from model.role import RoleModel
@@ -129,6 +130,21 @@ def get_profile_by_username(
         raise HTTPException(status_code=404, detail="User not found.")
 
     return user
+
+
+@router.get("/flight_logs/{username}")
+def get_flight_logs_for_profile(
+        username: str,
+        db: Session = Depends(get_db),
+        # pylint: disable=unused-argument
+        crypt_context: CryptContext = Depends(get_crypt_context),
+) -> List[FlightLogModelPublic]:
+    """Get the flight logs of a user with the specified ID."""
+    context = UserContext(db, crypt_context=crypt_context)
+    flight_logs = context.get_flight_logs_for_profile(username)
+
+    # TODO: we can add pagination for this from one of the search endpoint if we need it
+    return flight_logs
 
 
 @router.put("/profile_photo")

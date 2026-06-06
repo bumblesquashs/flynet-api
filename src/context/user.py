@@ -5,6 +5,7 @@ from jose import ExpiredSignatureError, jwt
 
 from core.db import build_keyword_query, build_query_sort
 from core.settings import settings
+from model.flight_logs import FlightLogModelPublic
 from model.requests import EmailRequestBody
 from model.responses import GeneralResponse
 from model.user import (
@@ -20,6 +21,7 @@ from model.user import (
 from passlib.context import CryptContext
 from schema.role import Role
 from schema.user import User
+from schema.flight_logs import FlightLogs
 from sqlalchemy.orm import Session
 from schema.user_settings import UserSettings
 
@@ -91,6 +93,20 @@ class UserContext:
             return None
 
         return UserModelPublic.from_orm(user)
+
+
+    def get_flight_logs_for_profile(self, username: str) -> List[FlightLogModelPublic]:
+        user = self.db.query(User).filter(User.username == username).first()
+
+        if not user:
+            return []
+
+        if not user.is_profile_public:
+            return []
+
+        logs = self.db.query(FlightLogs).filter(FlightLogs.user_id == user.id).all()
+
+        return [FlightLogModelPublic.from_orm(log) for log in logs]
 
 
     def get_by_id_public(self, user_id: int) -> Optional[UserModelPublic]:
