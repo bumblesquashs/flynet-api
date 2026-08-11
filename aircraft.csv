@@ -1,0 +1,355 @@
+model_name,manufacturer,icao_code,iata_code,year_introduced,family,class
+Airbus A300B2,Airbus,A30B,AB3,1974,A300,widebody
+Airbus A300B4,Airbus,A30B,AB4,1975,A300,widebody
+Airbus A300-600,Airbus,A306,AB6,1984,A300,widebody
+Airbus A300-600R,Airbus,A306,AB6,1988,A300,widebody
+Airbus A310-200,Airbus,A310,310,1983,A310,widebody
+Airbus A310-300,Airbus,A310,313,1985,A310,widebody
+Airbus A318-100,Airbus,A318,318,2003,A320,narrowbody
+Airbus A319-100,Airbus,A319,319,1996,A320,narrowbody
+Airbus A319neo,Airbus,A19N,31X,2018,A320,narrowbody
+Airbus A320-100,Airbus,A320,320,1988,A320,narrowbody
+Airbus A320-200,Airbus,A320,320,1988,A320,narrowbody
+Airbus A320neo,Airbus,A20N,32A,2016,A320,narrowbody
+Airbus A321-100,Airbus,A321,321,1994,A320,narrowbody
+Airbus A321-200,Airbus,A321,321,1997,A320,narrowbody
+Airbus A321neo,Airbus,A21N,32B,2017,A320,narrowbody
+Airbus A321XLR,Airbus,A21N,32Q,2024,A320,narrowbody
+Airbus A330-200,Airbus,A332,332,1998,A330,widebody
+Airbus A330-300,Airbus,A333,333,1994,A330,widebody
+Airbus A330-800neo,Airbus,A338,338,2020,A330,widebody
+Airbus A330-900neo,Airbus,A339,339,2018,A330,widebody
+Airbus A340-200,Airbus,A342,342,1993,A340,widebody
+Airbus A340-300,Airbus,A343,343,1993,A340,widebody
+Airbus A340-500,Airbus,A345,345,2002,A340,widebody
+Airbus A340-600,Airbus,A346,346,2002,A340,widebody
+Airbus A350-900,Airbus,A359,359,2015,A350,widebody
+Airbus A350-1000,Airbus,A35K,351,2018,A350,widebody
+Airbus A380-800,Airbus,A388,388,2007,A380,widebody
+Boeing 707-120,Boeing,B703,707,1958,707,narrowbody
+Boeing 707-120B,Boeing,B703,707,1961,707,narrowbody
+Boeing 707-320,Boeing,B703,707,1959,707,narrowbody
+Boeing 707-320B,Boeing,B703,707,1962,707,narrowbody
+Boeing 707-320C,Boeing,B703,707,1963,707,narrowbody
+Boeing 717-200,Boeing,B717,717,1999,717,narrowbody
+Boeing 727-100,Boeing,B721,721,1964,727,narrowbody
+Boeing 727-200,Boeing,B722,722,1967,727,narrowbody
+Boeing 727-200 Advanced,Boeing,B722,722,1971,727,narrowbody
+Boeing 737-100,Boeing,B731,731,1968,737 Classic,narrowbody
+Boeing 737-200,Boeing,B732,732,1968,737 Classic,narrowbody
+Boeing 737-200 Advanced,Boeing,B732,732,1971,737 Classic,narrowbody
+Boeing 737-300,Boeing,B733,733,1984,737 Classic,narrowbody
+Boeing 737-400,Boeing,B734,734,1988,737 Classic,narrowbody
+Boeing 737-500,Boeing,B735,735,1990,737 Classic,narrowbody
+Boeing 737-600,Boeing,B736,736,1998,737 NG,narrowbody
+Boeing 737-700,Boeing,B737,737,1998,737 NG,narrowbody
+Boeing 737-700ER,Boeing,B737,73E,2006,737 NG,narrowbody
+Boeing 737-800,Boeing,B738,738,1998,737 NG,narrowbody
+Boeing 737-900,Boeing,B739,739,2001,737 NG,narrowbody
+Boeing 737-900ER,Boeing,B739,73J,2007,737 NG,narrowbody
+Boeing 737 MAX 7,Boeing,B37M,7M7,2022,737 MAX,narrowbody
+Boeing 737 MAX 8,Boeing,B38M,7M8,2017,737 MAX,narrowbody
+Boeing 737 MAX 9,Boeing,B39M,7M9,2018,737 MAX,narrowbody
+Boeing 737 MAX 10,Boeing,B3XM,7MJ,2024,737 MAX,narrowbody
+Boeing 747-100,Boeing,B741,741,1970,747,widebody
+Boeing 747-100B,Boeing,B741,741,1971,747,widebody
+Boeing 747-200,Boeing,B742,742,1971,747,widebody
+Boeing 747-200B,Boeing,B742,742,1971,747,widebody
+Boeing 747-300,Boeing,B743,743,1983,747,widebody
+Boeing 747-400,Boeing,B744,744,1989,747,widebody
+Boeing 747-400ER,Boeing,B744,74E,2002,747,widebody
+Boeing 747-400D,Boeing,B744,744,1991,747,widebody
+Boeing 747-8I,Boeing,B748,748,2012,747,widebody
+Boeing 747SP,Boeing,B74S,74L,1976,747,widebody
+Boeing 757-200,Boeing,B752,752,1983,757,narrowbody
+Boeing 757-200 PF,Boeing,B752,752,1987,757,narrowbody
+Boeing 757-300,Boeing,B753,753,1999,757,narrowbody
+Boeing 767-200,Boeing,B762,762,1982,767,widebody
+Boeing 767-200ER,Boeing,B762,762,1984,767,widebody
+Boeing 767-300,Boeing,B763,763,1986,767,widebody
+Boeing 767-300ER,Boeing,B763,76W,1988,767,widebody
+Boeing 767-400ER,Boeing,B764,764,2000,767,widebody
+Boeing 777-200,Boeing,B772,772,1995,777,widebody
+Boeing 777-200ER,Boeing,B772,77A,1997,777,widebody
+Boeing 777-200LR,Boeing,B77L,77L,2006,777,widebody
+Boeing 777-300,Boeing,B773,773,1998,777,widebody
+Boeing 777-300ER,Boeing,B77W,77W,2004,777,widebody
+Boeing 777X-9,Boeing,B779,779,2026,777X,widebody
+Boeing 787-8,Boeing,B788,788,2011,787,widebody
+Boeing 787-9,Boeing,B789,789,2014,787,widebody
+Boeing 787-10,Boeing,B78X,78J,2018,787,widebody
+McDonnell Douglas DC-8-50,McDonnell Douglas,DC85,DC8,1961,DC-8,narrowbody
+McDonnell Douglas DC-8-61,McDonnell Douglas,DC86,DC8,1966,DC-8,narrowbody
+McDonnell Douglas DC-8-62,McDonnell Douglas,DC86,DC8,1967,DC-8,narrowbody
+McDonnell Douglas DC-8-63,McDonnell Douglas,DC86,DC8,1968,DC-8,narrowbody
+McDonnell Douglas DC-8-71,McDonnell Douglas,DC87,DC8,1982,DC-8,narrowbody
+McDonnell Douglas DC-8-72,McDonnell Douglas,DC87,DC8,1982,DC-8,narrowbody
+McDonnell Douglas DC-8-73,McDonnell Douglas,DC87,DC8,1982,DC-8,narrowbody
+McDonnell Douglas DC-9-10,McDonnell Douglas,DC91,D91,1965,DC-9,narrowbody
+McDonnell Douglas DC-9-20,McDonnell Douglas,DC92,D92,1968,DC-9,narrowbody
+McDonnell Douglas DC-9-30,McDonnell Douglas,DC93,D93,1967,DC-9,narrowbody
+McDonnell Douglas DC-9-40,McDonnell Douglas,DC94,D94,1968,DC-9,narrowbody
+McDonnell Douglas DC-9-50,McDonnell Douglas,DC95,D95,1975,DC-9,narrowbody
+McDonnell Douglas DC-10-10,McDonnell Douglas,DC10,D10,1971,DC-10,widebody
+McDonnell Douglas DC-10-30,McDonnell Douglas,DC10,D10,1972,DC-10,widebody
+McDonnell Douglas DC-10-40,McDonnell Douglas,DC10,D10,1972,DC-10,widebody
+McDonnell Douglas MD-11,McDonnell Douglas,MD11,M11,1990,MD-11,widebody
+McDonnell Douglas MD-81,McDonnell Douglas,MD81,M81,1980,MD-80,narrowbody
+McDonnell Douglas MD-82,McDonnell Douglas,MD82,M82,1981,MD-80,narrowbody
+McDonnell Douglas MD-83,McDonnell Douglas,MD83,M83,1985,MD-80,narrowbody
+McDonnell Douglas MD-87,McDonnell Douglas,MD87,M87,1987,MD-80,narrowbody
+McDonnell Douglas MD-88,McDonnell Douglas,MD88,M88,1988,MD-80,narrowbody
+McDonnell Douglas MD-90-30,McDonnell Douglas,MD90,M90,1995,MD-90,narrowbody
+Embraer ERJ-135ER,Embraer,E135,ERJ,1999,ERJ,regional-jet
+Embraer ERJ-135LR,Embraer,E135,ERJ,2000,ERJ,regional-jet
+Embraer ERJ-140LR,Embraer,E140,ERD,2001,ERJ,regional-jet
+Embraer ERJ-145,Embraer,E145,ER4,1996,ERJ,regional-jet
+Embraer ERJ-145ER,Embraer,E145,ER4,1997,ERJ,regional-jet
+Embraer ERJ-145LR,Embraer,E145,ER4,1998,ERJ,regional-jet
+Embraer ERJ-145XR,Embraer,E145,ER4,2002,ERJ,regional-jet
+Embraer E170,Embraer,E170,E70,2004,E-Jet,regional-jet
+Embraer E175,Embraer,E175,E75,2005,E-Jet,regional-jet
+Embraer E175 (Long Wing),Embraer,E75L,E7W,2016,E-Jet,regional-jet
+Embraer E190,Embraer,E190,E90,2005,E-Jet,narrowbody
+Embraer E190-AR,Embraer,E190,E90,2008,E-Jet,narrowbody
+Embraer E195,Embraer,E195,E95,2006,E-Jet,narrowbody
+Embraer E175-E2,Embraer,E75S,275,2021,E-Jet E2,regional-jet
+Embraer E190-E2,Embraer,E290,290,2018,E-Jet E2,narrowbody
+Embraer E195-E2,Embraer,E295,295,2019,E-Jet E2,narrowbody
+Embraer EMB 110 Bandeirante,Embraer,E110,EMB,1973,EMB 110,turboprop
+Embraer EMB 120 Brasilia,Embraer,E120,EM2,1985,EMB 120,turboprop
+Embraer EMB 120ER Brasilia,Embraer,E120,EM2,1992,EMB 120,turboprop
+Bombardier CRJ100,Bombardier,CRJ1,CR1,1992,CRJ,regional-jet
+Bombardier CRJ100ER,Bombardier,CRJ1,CR1,1993,CRJ,regional-jet
+Bombardier CRJ200,Bombardier,CRJ2,CR2,1995,CRJ,regional-jet
+Bombardier CRJ200ER,Bombardier,CRJ2,CR2,1997,CRJ,regional-jet
+Bombardier CRJ200LR,Bombardier,CRJ2,CR2,1998,CRJ,regional-jet
+Bombardier CRJ700,Bombardier,CRJ7,CR7,2001,CRJ,regional-jet
+Bombardier CRJ700 NextGen,Bombardier,CRJ7,CR7,2011,CRJ,regional-jet
+Bombardier CRJ900,Bombardier,CRJ9,CR9,2003,CRJ,regional-jet
+Bombardier CRJ900 NextGen,Bombardier,CRJ9,CR9,2010,CRJ,regional-jet
+Bombardier CRJ1000,Bombardier,CRJX,CRK,2011,CRJ,regional-jet
+Bombardier CRJ1000 NextGen,Bombardier,CRJX,CRK,2013,CRJ,regional-jet
+de Havilland Canada DHC-2 Beaver,de Havilland Canada,DHC2,DHB,1948,DHC-2,turboprop
+de Havilland Canada DHC-3 Otter,de Havilland Canada,DHC3,DHO,1951,DHC-3,turboprop
+de Havilland Canada DHC-6-100 Twin Otter,de Havilland Canada,DHC6,DHT,1966,DHC-6,turboprop
+de Havilland Canada DHC-6-200 Twin Otter,de Havilland Canada,DHC6,DHT,1968,DHC-6,turboprop
+de Havilland Canada DHC-6-300 Twin Otter,de Havilland Canada,DHC6,DHT,1969,DHC-6,turboprop
+de Havilland Canada DHC-6-400 Twin Otter,de Havilland Canada,DHC6,DHT,2010,DHC-6,turboprop
+de Havilland Canada DHC-7-100 Dash 7,de Havilland Canada,DHC7,DH7,1978,DHC-7,turboprop
+de Havilland Canada DHC-7-110 Dash 7,de Havilland Canada,DHC7,DH7,1980,DHC-7,turboprop
+de Havilland Canada DHC-8-100 Dash 8,de Havilland Canada,DH8A,DH1,1984,Dash 8,turboprop
+de Havilland Canada DHC-8-200 Dash 8,de Havilland Canada,DH8B,DH2,1995,Dash 8,turboprop
+de Havilland Canada DHC-8-300 Dash 8,de Havilland Canada,DH8C,DH3,1989,Dash 8,turboprop
+de Havilland Canada DHC-8-400 Q400,de Havilland Canada,DH8D,DH4,2000,Dash 8,turboprop
+de Havilland Canada DHC-8-400 Q400 NextGen,de Havilland Canada,DH8D,DH4,2015,Dash 8,turboprop
+ATR 42-300,ATR,AT43,AT4,1985,ATR 42,turboprop
+ATR 42-320,ATR,AT43,AT4,1988,ATR 42,turboprop
+ATR 42-500,ATR,AT45,AT5,1995,ATR 42,turboprop
+ATR 42-600,ATR,AT46,AT6,2009,ATR 42,turboprop
+ATR 42-600S,ATR,AT46,AT6,2022,ATR 42,turboprop
+ATR 72-100,ATR,AT72,AT7,1989,ATR 72,turboprop
+ATR 72-200,ATR,AT72,AT7,1990,ATR 72,turboprop
+ATR 72-210,ATR,AT72,AT7,1992,ATR 72,turboprop
+ATR 72-500,ATR,AT75,AT7,2000,ATR 72,turboprop
+ATR 72-600,ATR,AT76,AT7,2009,ATR 72,turboprop
+Fokker F27-100 Friendship,Fokker,F27,F27,1958,F27,turboprop
+Fokker F27-200 Friendship,Fokker,F27,F27,1959,F27,turboprop
+Fokker F27-500 Friendship,Fokker,F27,F27,1968,F27,turboprop
+Fokker F27-600 Friendship,Fokker,F27,F27,1968,F27,turboprop
+Fokker F50,Fokker,F50,F50,1987,F50,turboprop
+Fokker F28-1000 Fellowship,Fokker,F28,F28,1969,F28,regional-jet
+Fokker F28-2000 Fellowship,Fokker,F28,F28,1971,F28,regional-jet
+Fokker F28-3000 Fellowship,Fokker,F28,F28,1978,F28,regional-jet
+Fokker F28-4000 Fellowship,Fokker,F28,F28,1976,F28,regional-jet
+Fokker 70,Fokker,F70,F70,1994,Fokker 70/100,regional-jet
+Fokker 100,Fokker,F100,100,1988,Fokker 70/100,regional-jet
+BAe 146-100,British Aerospace,B461,141,1983,BAe 146,regional-jet
+BAe 146-200,British Aerospace,B462,142,1983,BAe 146,regional-jet
+BAe 146-300,British Aerospace,B463,143,1988,BAe 146,regional-jet
+Avro RJ70,British Aerospace,RJ70,141,1993,Avro RJ,regional-jet
+Avro RJ85,British Aerospace,RJ85,142,1993,Avro RJ,regional-jet
+Avro RJ100,British Aerospace,RJ1H,143,1992,Avro RJ,regional-jet
+BAe ATP,British Aerospace,ATP,ATP,1988,ATP,turboprop
+BAe Jetstream 31,British Aerospace,JS31,J31,1982,Jetstream,turboprop
+BAe Jetstream 41,British Aerospace,JS41,J41,1992,Jetstream,turboprop
+BAe 1-11-200,British Aerospace,BA11,B11,1965,BAC 1-11,narrowbody
+BAe 1-11-300,British Aerospace,BA11,B11,1966,BAC 1-11,narrowbody
+BAe 1-11-400,British Aerospace,BA11,B11,1965,BAC 1-11,narrowbody
+BAe 1-11-475,British Aerospace,BA11,B11,1970,BAC 1-11,narrowbody
+BAe 1-11-500,British Aerospace,BA11,B11,1968,BAC 1-11,narrowbody
+Vickers VC10-1100,Vickers,VC10,VC1,1964,VC10,narrowbody
+Vickers Super VC10-1150,Vickers,VC10,VC1,1965,VC10,narrowbody
+Hawker Siddeley Trident 1E,Hawker Siddeley,TRID,TRI,1965,Trident,narrowbody
+Hawker Siddeley Trident 2E,Hawker Siddeley,TRID,TRI,1968,Trident,narrowbody
+Hawker Siddeley Trident 3B,Hawker Siddeley,TRID,TRI,1971,Trident,narrowbody
+Sud Aviation Caravelle III,Sud Aviation,CRAV,CVL,1959,Caravelle,narrowbody
+Sud Aviation Caravelle VI-N,Sud Aviation,CRAV,CVL,1960,Caravelle,narrowbody
+Sud Aviation Caravelle VI-R,Sud Aviation,CRAV,CVL,1961,Caravelle,narrowbody
+Sud Aviation Caravelle 10R,Sud Aviation,CRAV,CVL,1965,Caravelle,narrowbody
+Sud Aviation Caravelle 10B,Sud Aviation,CRAV,CVL,1964,Caravelle,narrowbody
+Sud Aviation Caravelle 11R,Sud Aviation,CRAV,CVL,1967,Caravelle,narrowbody
+Sud Aviation Caravelle 12,Sud Aviation,CRAV,CVL,1970,Caravelle,narrowbody
+Concorde,Aérospatiale/BAC,CONC,SSC,1976,Concorde,supersonic
+Tupolev Tu-104A,Tupolev,T104,TU4,1956,Tu-104,narrowbody
+Tupolev Tu-124,Tupolev,T124,TUP,1963,Tu-124,narrowbody
+Tupolev Tu-134,Tupolev,T134,TU3,1967,Tu-134,narrowbody
+Tupolev Tu-134A,Tupolev,T134,TU3,1970,Tu-134,narrowbody
+Tupolev Tu-134A-3,Tupolev,T134,TU3,1980,Tu-134,narrowbody
+Tupolev Tu-154A,Tupolev,T154,TU5,1974,Tu-154,narrowbody
+Tupolev Tu-154B,Tupolev,T154,TU5,1977,Tu-154,narrowbody
+Tupolev Tu-154B-2,Tupolev,T154,TU5,1978,Tu-154,narrowbody
+Tupolev Tu-154M,Tupolev,T154,TU5,1984,Tu-154,narrowbody
+Tupolev Tu-204-100,Tupolev,T204,T20,1993,Tu-204,narrowbody
+Tupolev Tu-204-100B,Tupolev,T204,T20,1996,Tu-204,narrowbody
+Tupolev Tu-204-300,Tupolev,T204,T20,2004,Tu-204,narrowbody
+Tupolev Tu-214,Tupolev,T214,T20,2001,Tu-204,narrowbody
+Tupolev Tu-334-100,Tupolev,T334,TU4,2003,Tu-334,regional-jet
+Ilyushin Il-18,Ilyushin,IL18,IL8,1959,Il-18,turboprop
+Ilyushin Il-62,Ilyushin,IL62,IL6,1967,Il-62,narrowbody
+Ilyushin Il-62M,Ilyushin,IL62,IL6,1974,Il-62,narrowbody
+Ilyushin Il-76,Ilyushin,IL76,ILW,1974,Il-76,widebody
+Ilyushin Il-86,Ilyushin,IL86,ILW,1980,Il-86,widebody
+Ilyushin Il-96-300,Ilyushin,IL96,I93,1993,Il-96,widebody
+Ilyushin Il-96-400,Ilyushin,IL96,I93,2009,Il-96,widebody
+Yakovlev Yak-40,Yakovlev,YK40,YK4,1968,Yak-40,regional-jet
+Yakovlev Yak-42,Yakovlev,YK42,YK2,1980,Yak-42,narrowbody
+Yakovlev Yak-42D,Yakovlev,YK42,YK2,1988,Yak-42,narrowbody
+Antonov An-24,Antonov,AN24,AN4,1963,An-24,turboprop
+Antonov An-24B,Antonov,AN24,AN4,1966,An-24,turboprop
+Antonov An-24RV,Antonov,AN24,AN4,1969,An-24,turboprop
+Antonov An-26,Antonov,AN26,ANF,1969,An-26,turboprop
+Antonov An-28,Antonov,AN28,ANV,1984,An-28,turboprop
+Antonov An-38,Antonov,AN38,ANX,1994,An-38,turboprop
+Antonov An-140,Antonov,A140,A40,2002,An-140,turboprop
+Antonov An-148-100,Antonov,A148,A81,2009,An-148,regional-jet
+Antonov An-158,Antonov,A158,A81,2011,An-148,regional-jet
+Sukhoi Superjet 100-85,Sukhoi,SU95,SU9,2011,Superjet 100,regional-jet
+Sukhoi Superjet 100-95B,Sukhoi,SU95,SU9,2011,Superjet 100,regional-jet
+Sukhoi Superjet 100-95LR,Sukhoi,SU95,SU9,2013,Superjet 100,regional-jet
+Irkut MC-21-200,Irkut,MC21,MC2,2024,MC-21,narrowbody
+Irkut MC-21-300,Irkut,MC21,MC2,2024,MC-21,narrowbody
+COMAC ARJ21-700,COMAC,AJ21,ARJ,2016,ARJ21,regional-jet
+COMAC ARJ21-900,COMAC,AJ21,ARJ,2020,ARJ21,regional-jet
+COMAC C919,COMAC,C919,C19,2023,C919,narrowbody
+COMAC C929,COMAC,,,2030,C929,widebody
+Mitsubishi SpaceJet M90,Mitsubishi,M90,MRJ,2023,SpaceJet,regional-jet
+Saab 340A,Saab,SF34,SF3,1984,Saab 340,turboprop
+Saab 340B,Saab,SF34,SF3,1989,Saab 340,turboprop
+Saab 340B Plus,Saab,SF34,SF3,1994,Saab 340,turboprop
+Saab 2000,Saab,SB20,S20,1994,Saab 2000,turboprop
+Dornier 228-100,Dornier,D228,D28,1981,Do 228,turboprop
+Dornier 228-200,Dornier,D228,D28,1982,Do 228,turboprop
+Dornier 228-212,Dornier,D228,D28,1999,Do 228,turboprop
+Dornier 328-100,Dornier,D328,D38,1993,Do 328,turboprop
+Dornier 328-110,Dornier,D328,D38,1994,Do 328,turboprop
+Dornier 328JET,Dornier,D38J,D38,1999,Do 328,regional-jet
+CASA CN-235-100,CASA,CN35,CS5,1988,CN-235,turboprop
+CASA CN-235-200,CASA,CN35,CS5,1992,CN-235,turboprop
+CASA C-212 Aviocar,CASA,C212,CS2,1974,C-212,turboprop
+Let L-410UVP,Let Kunovice,L410,L41,1979,L-410,turboprop
+Let L-410UVP-E,Let Kunovice,L410,L41,1985,L-410,turboprop
+Let L-420,Let Kunovice,L420,L42,1997,L-410,turboprop
+LET L-610,Let Kunovice,L610,L61,1988,L-610,turboprop
+Lockheed L-1011-1 TriStar,Lockheed,L101,L10,1972,L-1011,widebody
+Lockheed L-1011-100 TriStar,Lockheed,L101,L10,1975,L-1011,widebody
+Lockheed L-1011-200 TriStar,Lockheed,L101,L10,1977,L-1011,widebody
+Lockheed L-1011-500 TriStar,Lockheed,L101,L15,1979,L-1011,widebody
+Beechcraft 1900C,Beechcraft,B190,BE9,1987,Beechcraft 1900,turboprop
+Beechcraft 1900D,Beechcraft,B190,BE9,1991,Beechcraft 1900,turboprop
+Beechcraft King Air 90,Beechcraft,BE9L,BE9,1964,King Air,turboprop
+Beechcraft King Air 100,Beechcraft,BE10,BEP,1969,King Air,turboprop
+Beechcraft King Air 200,Beechcraft,BE20,BES,1974,King Air,turboprop
+Beechcraft King Air 300,Beechcraft,BE30,BE3,1984,King Air,turboprop
+Beechcraft King Air 350,Beechcraft,B350,BE3,1990,King Air,turboprop
+Beechcraft King Air 350ER,Beechcraft,B350,BE3,2009,King Air,turboprop
+Beechcraft 99,Beechcraft,BE99,BE9,1968,Beechcraft 99,turboprop
+Beechcraft 99A,Beechcraft,BE99,BE9,1969,Beechcraft 99,turboprop
+Cessna 208 Caravan,Cessna,C208,CNT,1985,Caravan,turboprop
+Cessna 208B Grand Caravan,Cessna,C208,CN1,1986,Caravan,turboprop
+Cessna 208B Grand Caravan EX,Cessna,C208,CN1,2012,Caravan,turboprop
+Cessna 408 SkyCourier,Cessna,C408,408,2022,SkyCourier,turboprop
+Cessna 402C,Cessna,C402,402,1980,Cessna 400,piston-commuter
+Cessna 414A Chancellor,Cessna,C414,414,1978,Cessna 400,piston-commuter
+Tecnam P2006T,Tecnam,P06T,TEC,2010,P2006,piston-commuter
+Tecnam P2012 Traveller,Tecnam,P212,TEC,2019,P2012,turboprop
+Tecnam P-Mentor,Tecnam,PMEN,TEC,2022,P-Mentor,turboprop
+Pilatus PC-12,Pilatus,PC12,PL2,1994,PC-12,turboprop
+Pilatus PC-12 NG,Pilatus,PC12,PL2,2008,PC-12,turboprop
+Pilatus PC-12 NGX,Pilatus,PC12,PL2,2020,PC-12,turboprop
+Pilatus PC-24,Pilatus,PC24,PC2,2018,PC-24,regional-jet
+Short 330-200,Short Brothers,SH33,SH3,1976,Shorts 330,turboprop
+Short 360-100,Short Brothers,SH36,SH6,1982,Shorts 360,turboprop
+Short 360-300,Short Brothers,SH36,SH6,1987,Shorts 360,turboprop
+Piper PA-31 Navajo,Piper,P31,PA3,1967,PA-31,piston-commuter
+Piper PA-31T Cheyenne,Piper,PA3,PA3,1974,PA-31T,turboprop
+Piper PA-42 Cheyenne III,Piper,PA42,PA4,1980,PA-42,turboprop
+Piper PA-46 Malibu,Piper,PA46,PA4,1983,PA-46,piston-commuter
+Piper PA-34 Seneca,Piper,PA34,PA3,1971,PA-34,piston-commuter
+Britten-Norman BN-2 Islander,Britten-Norman,BN2P,BNI,1967,Islander,piston-commuter
+Britten-Norman BN-2A Islander,Britten-Norman,BN2P,BNI,1969,Islander,piston-commuter
+Britten-Norman BN-2B Islander,Britten-Norman,BN2T,BNI,1978,Islander,piston-commuter
+Britten-Norman BN-2T Turbine Islander,Britten-Norman,BN2T,BNI,1981,Islander,turboprop
+Britten-Norman BN-2A Trislander,Britten-Norman,BN2T,BNT,1971,Trislander,piston-commuter
+Grumman G-73 Mallard,Grumman,G73T,GRF,1946,Mallard,piston-commuter
+de Havilland DH.104 Dove,de Havilland,DH10,DHD,1946,Dove,piston-commuter
+de Havilland DH.114 Heron,de Havilland,DH14,DHN,1950,Heron,piston-commuter
+Swearingen SA226 Metroliner,Swearingen,SW4,SWM,1971,Metro,turboprop
+Swearingen SA227 Metro III,Swearingen,SW4,SWM,1982,Metro,turboprop
+Fairchild Swearingen Metro 23,Fairchild,SW4,SWM,1988,Metro,turboprop
+Convair 580,Convair,C580,CVF,1960,Convair 580,turboprop
+Convair 600,Convair,C600,CVF,1965,Convair 600,turboprop
+Convair 640,Convair,C640,CVF,1965,Convair 640,turboprop
+Vickers Viscount 700,Vickers,V70,VIC,1953,Viscount,turboprop
+Vickers Viscount 800,Vickers,V80,VIC,1956,Viscount,turboprop
+Vickers Viscount 810,Vickers,V80,VIC,1957,Viscount,turboprop
+Avro 748 Series 1,Avro,A748,AV4,1962,HS 748,turboprop
+Avro 748 Series 2,Avro,A748,AV4,1967,HS 748,turboprop
+Hawker Siddeley 748 Series 2A,Hawker Siddeley,A748,AV4,1971,HS 748,turboprop
+Hawker Siddeley 748 Series 2B,Hawker Siddeley,A748,AV4,1977,HS 748,turboprop
+Airbus/CASA CN-235-300 MPA,CASA,CN35,CS5,1999,CN-235,turboprop
+Harbin Y-12,Harbin,Y12,YN2,1984,Y-12,turboprop
+Harbin Y-12E,Harbin,Y12,YN2,1993,Y-12,turboprop
+Harbin Y-12F,Harbin,Y12,YN2,2015,Y-12,turboprop
+Xian MA60,Xian,MA60,MAD,2000,MA,turboprop
+Xian MA600,Xian,MA60,MAD,2008,MA,turboprop
+Xian MA700,Xian,MA70,MA7,2020,MA,turboprop
+Douglas DC-3,Douglas,DC3,D3F,1936,DC-3,piston-commuter
+Douglas DC-4,Douglas,DC4,DC4,1946,DC-4,piston-commuter
+Douglas DC-6,Douglas,DC6,DC6,1947,DC-6,piston-commuter
+Douglas DC-6B,Douglas,DC6,DC6,1951,DC-6,piston-commuter
+Douglas DC-7,Douglas,DC7,DC7,1953,DC-7,piston-commuter
+Douglas DC-7C,Douglas,DC7,DC7,1956,DC-7,piston-commuter
+Lockheed L-188 Electra,Lockheed,L188,LOE,1959,L-188,turboprop
+Lockheed L-188C Electra,Lockheed,L188,LOE,1959,L-188,turboprop
+Boeing 314 Clipper,Boeing,B314,,,1939,314 Clipper,piston-commuter
+Sikorsky S-61N,Sikorsky,S61,SIK,1961,S-61,helicopter
+Sikorsky S-76A,Sikorsky,S76,S76,1979,S-76,helicopter
+Sikorsky S-76B,Sikorsky,S76,S76,1987,S-76,helicopter
+Sikorsky S-76C,Sikorsky,S76,S76,1991,S-76,helicopter
+Sikorsky S-76C++,Sikorsky,S76,S76,2005,S-76,helicopter
+Sikorsky S-92,Sikorsky,S92,S92,2004,S-92,helicopter
+Airbus H125,Airbus Helicopters,H125,EC5,1977,H125,helicopter
+Airbus H135,Airbus Helicopters,H135,EC3,1996,H135,helicopter
+Airbus H145,Airbus Helicopters,H145,EC5,2014,H145,helicopter
+Airbus H175,Airbus Helicopters,H175,EC7,2014,H175,helicopter
+Airbus AS332 Super Puma,Airbus Helicopters,AS32,AS3,1981,Super Puma,helicopter
+Airbus AS332L Super Puma,Airbus Helicopters,AS32,AS3,1984,Super Puma,helicopter
+Airbus AS332L2 Super Puma,Airbus Helicopters,AS32,AS3,1996,Super Puma,helicopter
+Airbus EC155B,Airbus Helicopters,EC55,EC5,1997,EC155,helicopter
+Airbus H160,Airbus Helicopters,H160,H16,2021,H160,helicopter
+Leonardo AW139,Leonardo,AW13,AW1,2003,AW139,helicopter
+Leonardo AW169,Leonardo,AW16,AW1,2015,AW169,helicopter
+Leonardo AW189,Leonardo,AW18,AW1,2014,AW189,helicopter
+Bell 206 JetRanger,Bell,B06,BE0,1966,Bell 206,helicopter
+Bell 206L LongRanger,Bell,B06,BE2,1975,Bell 206,helicopter
+Bell 212,Bell,B212,B21,1971,Bell 212,helicopter
+Bell 412,Bell,B412,BH4,1981,Bell 412,helicopter
+Bell 412EP,Bell,B412,BH4,1994,Bell 412,helicopter
+Bell 412EPI,Bell,B412,BH4,2012,Bell 412,helicopter
+Bell 407,Bell,B407,B40,1996,Bell 407,helicopter
+Bell 429,Bell,B429,B42,2009,Bell 429,helicopter
+Robinson R44,Robinson,R44,RBN,1993,R44,helicopter
+Robinson R66,Robinson,R66,RBN,2010,R66,helicopter
+MBB BO 105,MBB,BO05,BOX,1970,BO 105,helicopter
+MBB/Kawasaki BK 117,MBB,BK17,BKT,1983,BK 117,helicopter

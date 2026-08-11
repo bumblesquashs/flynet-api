@@ -1,9 +1,15 @@
 from context.role import RoleContext
 from context.user import UserContext
-from core.dependencies import get_crypt_context, get_db
+from context.aircraft import AircraftContext
+from context.airlines import AirlineContext
+from context.airports import AirportContext
+from core.dependencies import get_crypt_context, get_db, get_user
 from core.security import create_access_token
 from core.settings import settings
-from fastapi import Depends, HTTPException
+from model.responses import GeneralResponse
+from model.security import UserTokenModel
+
+from fastapi import Depends, HTTPException, Security
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi_utils.inferring_router import InferringRouter
 from model.security import SecurityModel, TokenResponse
@@ -93,3 +99,22 @@ def login(
         image_uuid=user.image_uuid,
         image_path=user.image_path
     )
+
+
+@router.get("/import_static_csv")
+def import_csv(
+        db: Session = Depends(get_db),
+        # pylint: disable=unused-argument
+        current_user: UserTokenModel = Security(get_user, scopes=["admin"]),
+) -> GeneralResponse:
+    """Import static CSV data into the DB for aircraft, airports, and airlines"""
+
+    # context = AircraftContext(db)
+    # context.import_from_csv()
+
+    context = AirportContext(db)
+    context.import_from_csv()
+
+    context = AirlineContext(db)
+    return context.import_from_csv()
+

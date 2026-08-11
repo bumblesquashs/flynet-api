@@ -6,7 +6,6 @@ from fastapi import Depends, HTTPException, Security
 from fastapi_utils.inferring_router import InferringRouter
 from model import SearchResponse
 from model.airports import AirportModel, AirportUpdateModel
-from model.responses import GeneralResponse
 from model.security import UserTokenModel
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
@@ -23,24 +22,12 @@ def search(
     # pylint: disable=unused-argument
     current_user: UserTokenModel = Security(get_user, scopes=["user"]),
 ) -> SearchResponse[AirportModel]:
-    """Perform a flight log search, allows basic keyword search by airline, flight number, more later."""
+    """Perform an airport search, allows basic keyword search by airport name, IATA, ICAO, more later."""
     context = AirportContext(db)
 
     airports, total = context.search(query, limit, offset)
 
     return SearchResponse(items=airports, total=total)
-
-
-@router.get("/import_csv")
-def import_csv(
-        db: Session = Depends(get_db),
-        # pylint: disable=unused-argument
-        current_user: UserTokenModel = Security(get_user, scopes=["admin"]),
-) -> GeneralResponse:
-    """Get the details of a flight_log with the specified ID."""
-    context = AirportContext(db)
-    return context.import_from_csv()
-
 
 
 @router.get("/code/{code}")
@@ -50,7 +37,7 @@ def by_code(
         # pylint: disable=unused-argument
         current_user: UserTokenModel = Security(get_user, scopes=["user"]),
 ) -> AirportModel:
-    """Get the details of a flight_log with the specified IATA or ICAO code."""
+    """Get the details of an airport with the specified IATA or ICAO code."""
     context = AirportContext(db)
     airport = context.get_by_code(code)
 
@@ -67,7 +54,7 @@ def update_city(
         # pylint: disable=unused-argument
         current_user: UserTokenModel = Security(get_user, scopes=["user"]),
 ) -> AirportModel:
-    """Update an airports city on the fly."""
+    """Update an airport's city on the fly (changes it in the current DB but obviously not in the CSV)."""
     context = AirportContext(db)
     airport = context.rename_city(code, city_name)
 
@@ -77,14 +64,14 @@ def update_city(
     return airport
 
 
-@router.get("/{flight_log_id}")
+@router.get("/{airport_id}")
 def details(
         airport_id: int,
         db: Session = Depends(get_db),
         # pylint: disable=unused-argument
         current_user: UserTokenModel = Security(get_user, scopes=["user"]),
 ) -> AirportModel:
-    """Get the details of a flight_log with the specified ID."""
+    """Get the details of an airport with the specified ID."""
     context = AirportContext(db)
     airport = context.get(airport_id)
 
