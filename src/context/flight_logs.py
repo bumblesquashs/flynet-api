@@ -16,8 +16,7 @@ class FlightLogsContext:
     def __init__(self, db: Session):
         self.db = db
 
-    def search(self, query_string: str, start_date: Optional[str], end_date: Optional[str],
-               flight_number, airline, limit: int, offset: int, current_user: UserTokenModel) \
+    def search(self, query_string: str, start_date: Optional[str], end_date: Optional[str], limit: int, offset: int, current_user: UserTokenModel) \
             -> Tuple[List[FlightLogModel], int]:
 
         # only get logs for current user

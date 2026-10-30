@@ -4,6 +4,7 @@ from sqlalchemy import Column, String, Integer
 
 class Aircraft(Base):
     primary_name = Column(String)
+    model = Column(String)
     icao_code = Column(String)
     iata_code = Column(String)
     manufacturer = Column(String)

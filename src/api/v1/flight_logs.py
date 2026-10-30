@@ -54,7 +54,6 @@ def search(
     query: Optional[str] = None,
     start_date: Optional[str] = None,
     end_date: Optional[str] = None,
-    airline: Optional[str] = None,
     flight_number: Optional[str] = None,
     limit: int = 50,
     offset: int = 0,
@@ -65,8 +64,7 @@ def search(
     """Perform a flight log search, allows basic keyword search by airline, flight number, more later."""
     context = FlightLogsContext(db)
 
-    flight_logs, total = context.search(query, start_date, end_date, flight_number, airline,
-                                    limit, offset, current_user)
+    flight_logs, total = context.search(query, start_date, end_date, limit, offset, current_user)
 
     return SearchResponse(items=flight_logs, total=total)
 

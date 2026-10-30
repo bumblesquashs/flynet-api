@@ -7,6 +7,7 @@ class AircraftCreateModel(APIModel):
     """Model used when importing aircraft from csv"""
 
     primary_name: str = None
+    model: str = None
     icao_code: str = None
     iata_code: Optional[str] = None
     manufacturer: str = None

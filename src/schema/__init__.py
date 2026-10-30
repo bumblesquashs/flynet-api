@@ -5,3 +5,5 @@ def init_relationships():
     from .flight_logs import FlightLogs
     from .airports import Airport
     from .user_settings import UserSettings
+    from .airlines import Airline
+    from .aircraft import Aircraft

@@ -18,7 +18,7 @@ def insert_airlines(db: Session) -> List[AirlineModel]:
          is_active=True,
     ),
     AirlinePopulateModel(
-        id=1,
+        id=2,
         primary_name="Scandinavian Airlines",
         icao_code="SAS",
         iata_code="SK",

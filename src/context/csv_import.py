@@ -208,15 +208,17 @@ class ImportContext:
 
         return FlightLogImportModel(
             date=date,
-            airline=try_names("airline", csv_row),
+            #airline=try_names("airline", csv_row),
             flight_number=try_names("flight_number", csv_row),
             departure_time=departure_time,
             arrival_time=arrival_time,
-            plane_model=try_names("plane_model", csv_row),
+            #plane_model=try_names("plane_model", csv_row),
             plane_registration=try_names("plane_registration", csv_row),
             note=try_names("note", csv_row),
             origin_airport_id=origin_airport_id,
             destination_airport_id=destination_airport_id,
+            airline_id=1, # TODO: use imported row to query airlines to find airline id
+            aircraft_id=1, # TODO: use imported row to query aircraft to find aircraft id
             user_id=user_id,
         )
 

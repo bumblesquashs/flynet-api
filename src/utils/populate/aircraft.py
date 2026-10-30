@@ -12,6 +12,7 @@ def insert_aircraft(db: Session) -> List[AircraftModel]:
      AircraftPopulateModel(
          id=1,
          primary_name="Airbus A380-800",
+         model="A380-800",
          icao_code="A388",
          iata_code="380",
          family="A380",
@@ -22,6 +23,7 @@ def insert_aircraft(db: Session) -> List[AircraftModel]:
         AircraftPopulateModel(
             id=2,
             primary_name="Boeing 737-200",
+            model="737-200",
             icao_code="B732",
             iata_code="732",
             family="B737",

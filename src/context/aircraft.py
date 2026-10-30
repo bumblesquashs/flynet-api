@@ -26,6 +26,7 @@ def load_aircraft_from_csv(path: str = "../aircraft.csv") -> List[AircraftCreate
                 # 'aircraftum' is the singular of aircraft, trust
                 aircraftum = AircraftCreateModel(
                     primary_name=row['model_name'],
+                    model = row['model'],
                     icao_code=row['icao_code'],
                     iata_code=row['iata_code'],
                     family=row['family'],
@@ -56,7 +57,7 @@ class AircraftContext:
 
         # keyword search
         db_query = build_keyword_query(
-            [Aircraft.primary_name, Aircraft.iata_code, Aircraft.icao_code, Aircraft.family, Aircraft.manufacturer],
+            [Aircraft.primary_name, Aircraft.model, Aircraft.iata_code, Aircraft.icao_code, Aircraft.family, Aircraft.manufacturer],
             query_string,
             base_query,
         )

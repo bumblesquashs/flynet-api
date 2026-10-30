@@ -2,6 +2,9 @@ from datetime import datetime
 from typing import Optional
 
 from fastapi_utils.api_model import APIModel
+
+from model.aircraft import AircraftModel
+from model.airlines import AirlineModel
 from model.user import UserModel
 from model.airports import AirportModel
 
@@ -9,16 +12,16 @@ class FlightLogCreateModel(APIModel):
     """Model used when creating logs"""
 
     flight_number: Optional[str] = None
-    airline: Optional[str] = None
     date: Optional[datetime] = None
     departure_time: Optional[str] = None
     arrival_time: Optional[str] = None
-    plane_model: Optional[str] = None
     plane_registration: Optional[str] = None
     note: Optional[str] = None
 
     origin_airport_id: Optional[int] = None
     destination_airport_id: Optional[int] = None
+    aircraft_id: Optional[int] = None
+    airline_id: Optional[int] = None
 
 
 class FlightLogImportModel(FlightLogCreateModel):
@@ -36,6 +39,8 @@ class FlightLogModel(FlightLogCreateModel):
 
     origin_airport: Optional[AirportModel] = None
     destination_airport: Optional[AirportModel] = None
+    aircraft: Optional[AircraftModel] = None
+    airline: Optional[AirlineModel] = None
 
     id: Optional[int]
 
@@ -47,6 +52,8 @@ class FlightLogModelPublic(FlightLogCreateModel):
 
     origin_airport: Optional[AirportModel] = None
     destination_airport: Optional[AirportModel] = None
+    aircraft: Optional[AircraftModel] = None
+    airline: Optional[AirlineModel] = None
 
     id: Optional[int]
 
@@ -62,5 +69,7 @@ class FlightLogPopulateModel(FlightLogCreateModel):
 
     origin_airport_id: Optional[int] = None
     destination_airport_id: Optional[int] = None
+    aircraft_id: Optional[int] = None
+    airline_id: Optional[int] = None
 
     id: Optional[int]

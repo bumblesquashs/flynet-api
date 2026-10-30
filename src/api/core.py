@@ -109,8 +109,8 @@ def import_csv(
 ) -> GeneralResponse:
     """Import static CSV data into the DB for aircraft, airports, and airlines"""
 
-    # context = AircraftContext(db)
-    # context.import_from_csv()
+    context = AircraftContext(db)
+    context.import_from_csv()
 
     context = AirportContext(db)
     context.import_from_csv()
